@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Breeze over four oceans · NumericalEarth.jl</title><meta name="title" content="Breeze over four oceans · NumericalEarth.jl"/><meta property="og:title" content="Breeze over four oceans · NumericalEarth.jl"/><meta property="twitter:title" content="Breeze over four oceans · NumericalEarth.jl"/><meta name="description" content="Documentation for NumericalEarth.jl."/><meta property="og:description" content="Documentation for NumericalEarth.jl."/><meta property="twitter:description" content="Documentation for NumericalEarth.jl."/><meta property="og:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/breeze_over_four_oceans/"/><meta property="twitter:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/breeze_over_four_oceans/"/><link rel="canonical" href="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/breeze_over_four_oceans/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">NumericalEarth.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><a class="tocitem" href="../../earth_system_model/">EarthSystemModel</a></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../single_column_os_papa_simulation/">Single-column ocean simulation</a></li><li><a class="tocitem" href="../one_degree_simulation/">One-degree ocean–sea ice simulation</a></li><li><a class="tocitem" href="../near_global_ocean_simulation/">Near-global ocean simulation</a></li><li><a class="tocitem" href="../global_climate_simulation/">Global climate simulation</a></li><li class="is-active"><a class="tocitem" href>Breeze over four oceans</a><ul class="internal"><li><a class="tocitem" href="#Grid-setup"><span>Grid setup</span></a></li><li><a class="tocitem" href="#Four-independent-atmospheres"><span>Four independent atmospheres</span></a></li><li><a class="tocitem" href="#Atmospheric-initial-conditions"><span>Atmospheric initial conditions</span></a></li><li><a class="tocitem" href="#Prescribed-ocean-(constant-SST)"><span>Prescribed ocean (constant SST)</span></a></li><li><a class="tocitem" href="#Slab-ocean-(10m-depth)"><span>Slab ocean (10m depth)</span></a></li><li><a class="tocitem" href="#Full-hydrostatic-ocean-(50m-depth-with-CATKE-mixing)"><span>Full hydrostatic ocean (50m depth with CATKE mixing)</span></a></li><li><a class="tocitem" href="#Nonhydrostatic-ocean-LES-(50m-depth)"><span>Nonhydrostatic ocean LES (50m depth)</span></a></li><li><a class="tocitem" href="#Coupled-models"><span>Coupled models</span></a></li><li><a class="tocitem" href="#Progress-callbacks"><span>Progress callbacks</span></a></li><li><a class="tocitem" href="#Output-writers"><span>Output writers</span></a></li><li><a class="tocitem" href="#Run-all-four-simulations-sequentially"><span>Run all four simulations sequentially</span></a></li><li><a class="tocitem" href="#Animation"><span>Animation</span></a></li></ul></li><li><a class="tocitem" href="../ERA5_hourly_data/">ERA5 hourly data</a></li></ul></li><li><a class="tocitem" href="../../vertical_grids/">Vertical grids</a></li><li><span class="tocitem">Metadata</span><ul><li><a class="tocitem" href="../../Metadata/metadata_overview/">Overview</a></li><li><a class="tocitem" href="../../Metadata/supported_variables/">Supported variables</a></li></ul></li><li><a class="tocitem" href="../../interface_fluxes/">Interface fluxes</a></li><li><span class="tocitem">Appendix</span><ul><li><a class="tocitem" href="../../appendix/notation/">Notation</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../library/outline/">Contents</a></li><li><a class="tocitem" href="../../library/public_api/">Public API</a></li><li><a class="tocitem" href="../../library/private_api/">Private API</a></li><li><a class="tocitem" href="../../library/function_index/">Function index</a></li></ul></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Breeze over four oceans</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Breeze over four oceans</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl/blob/main/examples/breeze_over_four_oceans.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Atmospheric-convection-over-four-ocean-models"><a class="docs-heading-anchor" href="#Atmospheric-convection-over-four-ocean-models">Atmospheric convection over four ocean models</a><a id="Atmospheric-convection-over-four-ocean-models-1"></a><a class="docs-heading-anchor-permalink" href="#Atmospheric-convection-over-four-ocean-models" title="Permalink"></a></h1><p>This example demonstrates coupling a Breeze atmospheric large eddy simulation (LES) with four different ocean models using NumericalEarth&#39;s <code>EarthSystemModel</code> framework:</p><ol><li><strong>Prescribed ocean</strong> — constant SST that does not respond to surface fluxes</li><li><strong>Slab ocean</strong> (10m depth) — a well-mixed layer that responds uniformly to surface fluxes</li><li><strong>Hydrostatic ocean</strong> (50m depth) — with CATKE turbulent mixing and stratification</li><li><strong>Nonhydrostatic ocean</strong> (50m depth) — resolved LES turbulence with WENO advection</li></ol><p>The atmosphere drives convective turbulence over a warm ocean surface. The coupling framework computes turbulent surface fluxes (sensible heat, latent heat, and momentum) using Monin–Obukhov similarity theory. These fluxes cool the ocean and heat the atmosphere, creating a two-way feedback loop.</p><p>By comparing the four models, we can see how ocean vertical mixing and stratification affect the SST response to atmospheric forcing — or in the prescribed case, how the atmosphere evolves when the SST is held fixed.</p><pre><code class="language-julia hljs">using NumericalEarth
+using Breeze
+using Oceananigans
+using Oceananigans.Units
+using Printf
+using Statistics: mean</code></pre><pre><code class="nohighlight hljs">[ Info: Oceananigans will use 8 threads
+</code></pre><h2 id="Grid-setup"><a class="docs-heading-anchor" href="#Grid-setup">Grid setup</a><a id="Grid-setup-1"></a><a class="docs-heading-anchor-permalink" href="#Grid-setup" title="Permalink"></a></h2><p>We use a 2D domain in the x-z plane: 20 km wide and 10 km tall with 64 × 64 grid points. The <code>Periodic</code> x-topology allows convective cells to wrap around, and <code>Flat</code> y-topology makes this a 2D simulation.</p><pre><code class="language-julia hljs">Nxᵃᵗ = 64 # Atmosphere horizontal resolution (shared with ocean)
+Nzᵃᵗ = 64 # Atmosphere vertical resolution
+Nzᵒᶜ = 20 # Hydrostatic ocean vertical resolution
+Nzⁿʰ = 50 # Nonhydrostatic ocean vertical resolution (1m spacing)
+
+grid = RectilinearGrid(size = (Nxᵃᵗ, Nzᵃᵗ), halo = (5, 5),
+                       x = (-10kilometers, 10kilometers),
+                       z = (0, 10kilometers),
+                       topology = (Periodic, Flat, Bounded))</code></pre><pre><code class="nohighlight hljs">64×1×64 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── Periodic x ∈ [-10000.0, 10000.0) regularly spaced with Δx=312.5
+├── Flat y                           
+└── Bounded  z ∈ [0.0, 10000.0]      regularly spaced with Δz=156.25</code></pre><h2 id="Four-independent-atmospheres"><a class="docs-heading-anchor" href="#Four-independent-atmospheres">Four independent atmospheres</a><a id="Four-independent-atmospheres-1"></a><a class="docs-heading-anchor-permalink" href="#Four-independent-atmospheres" title="Permalink"></a></h2><p>Each coupled model needs its own Breeze atmosphere instance because the <code>EarthSystemModel</code> writes boundary conditions into the atmosphere. All are initialized identically.</p><pre><code class="language-julia hljs">Tᵒᶜ = 290 # K
+θᵃᵗ = 250 # K
+U₀ = 10 # m/s
+coriolis = FPlane(latitude=33)
+
+prescribed_ocean_atmos = atmosphere_simulation(grid; potential_temperature=θᵃᵗ, coriolis)
+slab_ocean_atmos       = atmosphere_simulation(grid; potential_temperature=θᵃᵗ, coriolis)
+full_ocean_atmos       = atmosphere_simulation(grid; potential_temperature=θᵃᵗ, coriolis)
+nh_ocean_atmos         = atmosphere_simulation(grid; potential_temperature=θᵃᵗ, coriolis)</code></pre><pre><code class="nohighlight hljs">AtmosphereModel{CPU, RectilinearGrid}(time = 0 seconds, iteration = 0)
+├── grid: 64×1×64 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── dynamics: AnelasticDynamics(p₀=101325.0, θ₀=250.0)
+├── formulation: LiquidIcePotentialTemperatureFormulation
+├── thermodynamic_constants: ThermodynamicConstants{Float64}
+├── timestepper: SSPRungeKutta3
+├── advection scheme: 
+│   ├── momentum: WENO{5, Float64, Oceananigans.Utils.BackendOptimizedDivision}(order=9)
+│   ├── ρθ: WENO{3, Float64, Oceananigans.Utils.BackendOptimizedDivision}(order=5)
+│   └── ρqᵉ: WENO{3, Float64, Oceananigans.Utils.BackendOptimizedDivision}(order=5)
+├── forcing: @NamedTuple{ρu::Returns{Float64}, ρv::Returns{Float64}, ρw::Returns{Float64}, ρθ::Returns{Float64}, ρqᵉ::Returns{Float64}, ρe::Returns{Float64}}
+├── tracers: ()
+├── coriolis: FPlane{Float64}(f=7.94314e-5)
+└── microphysics: SaturationAdjustment</code></pre><h2 id="Atmospheric-initial-conditions"><a class="docs-heading-anchor" href="#Atmospheric-initial-conditions">Atmospheric initial conditions</a><a id="Atmospheric-initial-conditions-1"></a><a class="docs-heading-anchor-permalink" href="#Atmospheric-initial-conditions" title="Permalink"></a></h2><p>We initialize all atmospheres with the reference potential temperature profile plus small random perturbations below 500 m. These perturbations seed convective instability, which develops into turbulent convection driven by surface heat fluxes. A background zonal wind <code>U₀</code> provides a nonzero wind speed for the similarity theory flux computation.</p><pre><code class="language-julia hljs">reference_state = slab_ocean_atmos.dynamics.reference_state
+
+θᵢ(x, z) = reference_state.potential_temperature + 0.1 * randn() * (z &lt; 500)
+set!(prescribed_ocean_atmos, θ=θᵢ, u=U₀)
+set!(slab_ocean_atmos,       θ=θᵢ, u=U₀)
+set!(full_ocean_atmos,       θ=θᵢ, u=U₀)
+set!(nh_ocean_atmos,         θ=θᵢ, u=U₀)</code></pre><h2 id="Prescribed-ocean-(constant-SST)"><a class="docs-heading-anchor" href="#Prescribed-ocean-(constant-SST)">Prescribed ocean (constant SST)</a><a id="Prescribed-ocean-(constant-SST)-1"></a><a class="docs-heading-anchor-permalink" href="#Prescribed-ocean-(constant-SST)" title="Permalink"></a></h2><p>The prescribed ocean holds a fixed temperature that does not evolve. Surface fluxes are still computed (so the atmosphere feels the ocean), but the ocean temperature is pinned. Its temperature is in Kelvin.</p><pre><code class="language-julia hljs">sst_grid = RectilinearGrid(grid.architecture,
+                           size = grid.Nx,
+                           halo = grid.Hx,
+                           x = (-10kilometers, 10kilometers),
+                           topology = (Periodic, Flat, Flat))
+
+prescribed_ocean = PrescribedOcean(sst_grid)
+set!(prescribed_ocean, T=Tᵒᶜ)</code></pre><h2 id="Slab-ocean-(10m-depth)"><a class="docs-heading-anchor" href="#Slab-ocean-(10m-depth)">Slab ocean (10m depth)</a><a id="Slab-ocean-(10m-depth)-1"></a><a class="docs-heading-anchor-permalink" href="#Slab-ocean-(10m-depth)" title="Permalink"></a></h2><p>The slab ocean represents a well-mixed ocean layer of fixed depth. Its temperature is in Kelvin (the coupling framework handles the conversion).</p><pre><code class="language-julia hljs">slab_ocean = SlabOcean(sst_grid, depth=10)
+set!(slab_ocean, T=Tᵒᶜ)</code></pre><h2 id="Full-hydrostatic-ocean-(50m-depth-with-CATKE-mixing)"><a class="docs-heading-anchor" href="#Full-hydrostatic-ocean-(50m-depth-with-CATKE-mixing)">Full hydrostatic ocean (50m depth with CATKE mixing)</a><a id="Full-hydrostatic-ocean-(50m-depth-with-CATKE-mixing)-1"></a><a class="docs-heading-anchor-permalink" href="#Full-hydrostatic-ocean-(50m-depth-with-CATKE-mixing)" title="Permalink"></a></h2><p>The full ocean uses a <code>HydrostaticFreeSurfaceModel</code> with the default TEOS-10 equation of state and CATKE vertical mixing parameterization. The grid has 20 vertical levels (2.5m vertical resolution). We disable advection since this is primarily a 1D vertical mixing problem.</p><p>Since TEOS-10 expects temperature in degrees Celsius, the ocean temperature is initialized accordingly. The coupling framework automatically converts from Celsius to Kelvin for the flux computation.</p><pre><code class="language-julia hljs">ocean_grid = RectilinearGrid(grid.architecture,
+                             size = (grid.Nx, Nzᵒᶜ),
+                             halo = (grid.Hx, 5),
+                             x = (-10kilometers, 10kilometers),
+                             z = (-50, 0),
+                             topology = (Periodic, Flat, Bounded))
+
+ocean = ocean_simulation(ocean_grid; coriolis,
+                         closure = CATKEVerticalDiffusivity(), # note ocean_simulation default does not work.
+                         momentum_advection = nothing,
+                         tracer_advection = nothing,
+                         Δt = 2,
+                         warn = false)
+
+celsius_to_kelvin = 273.15
+T₀ = Tᵒᶜ - celsius_to_kelvin               # surface temperature in °C
+Tᵢ(x, z) = T₀ + (z + 10) / 50 * (z &lt; -10)  # linear stratification below 10m
+set!(ocean.model, T=Tᵢ, S=35)</code></pre><h2 id="Nonhydrostatic-ocean-LES-(50m-depth)"><a class="docs-heading-anchor" href="#Nonhydrostatic-ocean-LES-(50m-depth)">Nonhydrostatic ocean LES (50m depth)</a><a id="Nonhydrostatic-ocean-LES-(50m-depth)-1"></a><a class="docs-heading-anchor-permalink" href="#Nonhydrostatic-ocean-LES-(50m-depth)" title="Permalink"></a></h2><p>The nonhydrostatic ocean uses a <code>NonhydrostaticModel</code> that resolves the full 3D pressure field. With 1m vertical resolution and WENO(order=9) advection, it performs implicit LES. No turbulence closure is needed.</p><pre><code class="language-julia hljs">nh_ocean_grid = RectilinearGrid(grid.architecture,
+                                size = (grid.Nx, Nzⁿʰ),
+                                halo = (grid.Hx, 5),
+                                x = (-10kilometers, 10kilometers),
+                                z = (-50, 0),
+                                topology = (Periodic, Flat, Bounded))
+
+nh_ocean = ocean_simulation(nh_ocean_grid; model=:nonhydrostatic, coriolis, Δt=2)
+set!(nh_ocean.model, T=Tᵢ, S=35)</code></pre><h2 id="Coupled-models"><a class="docs-heading-anchor" href="#Coupled-models">Coupled models</a><a id="Coupled-models-1"></a><a class="docs-heading-anchor-permalink" href="#Coupled-models" title="Permalink"></a></h2><p>We disable gustiness in the similarity theory flux computation so the surface wind speed is determined entirely by the resolved velocity field.</p><pre><code class="language-julia hljs">atmosphere_ocean_fluxes = SimilarityTheoryFluxes(gustiness_parameter=0, minimum_gustiness=0)
+
+prescribed_interfaces = ComponentInterfaces(prescribed_ocean_atmos, prescribed_ocean; atmosphere_ocean_fluxes)
+slab_interfaces       = ComponentInterfaces(slab_ocean_atmos, slab_ocean; atmosphere_ocean_fluxes)
+full_interfaces       = ComponentInterfaces(full_ocean_atmos, ocean; atmosphere_ocean_fluxes)
+nh_interfaces         = ComponentInterfaces(nh_ocean_atmos, nh_ocean; atmosphere_ocean_fluxes)
+
+prescribed_model = AtmosphereOceanModel(prescribed_ocean_atmos, prescribed_ocean; interfaces = prescribed_interfaces)
+slab_model       = AtmosphereOceanModel(slab_ocean_atmos, slab_ocean; interfaces = slab_interfaces)
+full_model       = AtmosphereOceanModel(full_ocean_atmos, ocean; interfaces = full_interfaces)
+nh_model         = AtmosphereOceanModel(nh_ocean_atmos, nh_ocean; interfaces = nh_interfaces)
+
+Δt = 5seconds
+stop_time = 4hours
+prescribed_sim = Simulation(prescribed_model; Δt, stop_time)
+slab_sim       = Simulation(slab_model; Δt, stop_time)
+full_sim       = Simulation(full_model; Δt, stop_time)
+nh_sim         = Simulation(nh_model; Δt, stop_time)</code></pre><pre><code class="nohighlight hljs">Simulation of EarthSystemModel{CPU}(time = 0 seconds, iteration = 0)
+├── Next time step: 5 seconds
+├── run_wall_time: 0 seconds
+├── run_wall_time / iteration: NaN days
+├── stop_time: 4 hours
+├── stop_iteration: Inf
+├── wall_time_limit: Inf
+├── minimum_relative_step: 0.0
+├── callbacks: OrderedDict with 4 entries:
+│   ├── stop_time_exceeded =&gt; Callback of stop_time_exceeded on IterationInterval(1)
+│   ├── stop_iteration_exceeded =&gt; Callback of stop_iteration_exceeded on IterationInterval(1)
+│   ├── wall_time_limit_exceeded =&gt; Callback of wall_time_limit_exceeded on IterationInterval(1)
+│   └── nan_checker =&gt; Callback of NaNChecker for T_ocean on IterationInterval(100)
+└── output_writers: OrderedDict with no entries</code></pre><h2 id="Progress-callbacks"><a class="docs-heading-anchor" href="#Progress-callbacks">Progress callbacks</a><a id="Progress-callbacks-1"></a><a class="docs-heading-anchor-permalink" href="#Progress-callbacks" title="Permalink"></a></h2><pre><code class="language-julia hljs">function prescribed_progress(sim)
+    atmos = sim.model.atmosphere
+    u, v, w = atmos.velocities
+    umax = maximum(abs, u)
+    wmax = maximum(abs, w)
+    msg = @sprintf(&quot;[Prescribed] Iter: %d, t = %s, max|u|: %.2e, max|w|: %.2e, SST: %.3f (fixed)&quot;,
+                    iteration(sim), prettytime(sim), umax, wmax, Tᵒᶜ)
+    @info msg
+    return nothing
+end
+
+function slab_progress(sim)
+    atmos = sim.model.atmosphere
+    u, v, w = atmos.velocities
+    umax = maximum(abs, u)
+    wmax = maximum(abs, w)
+    sst = sim.model.ocean.temperature
+    sst_min = minimum(sst)
+    sst_max = maximum(sst)
+    msg = @sprintf(&quot;[Slab] Iter: %d, t = %s, max|u|: %.2e, max|w|: %.2e, SST: (%.3f, %.3f)&quot;,
+                    iteration(sim), prettytime(sim), umax, wmax, sst_min, sst_max)
+    @info msg
+    return nothing
+end
+
+function full_progress(sim)
+    atmos = sim.model.atmosphere
+    u, v, w = atmos.velocities
+    umax = maximum(abs, u)
+    wmax = maximum(abs, w)
+    T = sim.model.ocean.model.tracers.T
+    Nz = size(sim.model.ocean.model.grid, 3)
+    sst_surface = view(interior(T), :, 1, Nz)
+    sst_min = minimum(sst_surface)
+    sst_max = maximum(sst_surface)
+    msg = @sprintf(&quot;[Full] Iter: %d, t = %s, max|u|: %.2e, max|w|: %.2e, SST: (%.3f, %.3f)&quot;,
+                    iteration(sim), prettytime(sim), umax, wmax, sst_min, sst_max)
+    @info msg
+    return nothing
+end
+
+function nh_progress(sim)
+    atmos = sim.model.atmosphere
+    u, v, w = atmos.velocities
+    umax = maximum(abs, u)
+    wmax = maximum(abs, w)
+    T = sim.model.ocean.model.tracers.T
+    Nz = size(sim.model.ocean.model.grid, 3)
+    sst_surface = view(interior(T), :, 1, Nz)
+    sst_min = minimum(sst_surface)
+    sst_max = maximum(sst_surface)
+    msg = @sprintf(&quot;[NH] Iter: %d, t = %s, max|u|: %.2e, max|w|: %.2e, SST: (%.3f, %.3f)&quot;,
+                    iteration(sim), prettytime(sim), umax, wmax, sst_min, sst_max)
+    @info msg
+    return nothing
+end
+
+add_callback!(prescribed_sim, prescribed_progress, IterationInterval(400))
+add_callback!(slab_sim,       slab_progress,       IterationInterval(400))
+add_callback!(full_sim,       full_progress,       IterationInterval(400))
+add_callback!(nh_sim,         nh_progress,         IterationInterval(400))</code></pre><h2 id="Output-writers"><a class="docs-heading-anchor" href="#Output-writers">Output writers</a><a id="Output-writers-1"></a><a class="docs-heading-anchor-permalink" href="#Output-writers" title="Permalink"></a></h2><ul><li>Prescribed simulation: atmospheric θ and u (SST is constant, no need to save).</li><li>Slab simulation: atmospheric θ and u, plus slab SST.</li><li>Full simulation: atmospheric θ, u, cloud water, and w, plus full-depth ocean temperature T.</li><li>Nonhydrostatic simulation: atmospheric θ, u, cloud water, and w, plus full-depth ocean temperature T.</li></ul><pre><code class="language-julia hljs">u_p, v_p, w_p = prescribed_ocean_atmos.velocities
+θ_p = liquid_ice_potential_temperature(prescribed_ocean_atmos)
+
+prescribed_sim.output_writers[:atmos] = JLD2Writer(prescribed_model, (; θ=θ_p, u=u_p),
+                                                   filename = &quot;prescribed_ocean_atmos&quot;,
+                                                   schedule = TimeInterval(1minute),
+                                                   overwrite_existing = true)
+
+u_s, v_s, w_s = slab_ocean_atmos.velocities
+θ_s = liquid_ice_potential_temperature(slab_ocean_atmos)
+
+slab_sim.output_writers[:atmos] = JLD2Writer(slab_model, (; θ=θ_s, u=u_s),
+                                             filename = &quot;slab_ocean_atmos&quot;,
+                                             schedule = TimeInterval(1minute),
+                                             overwrite_existing = true)
+
+slab_sim.output_writers[:sst] = JLD2Writer(slab_model, (; SST=slab_ocean.temperature),
+                                           filename = &quot;sst_slab&quot;,
+                                           schedule = TimeInterval(1minute),
+                                           overwrite_existing = true)
+
+u_f, v_f, w_f = full_ocean_atmos.velocities
+θ_f = liquid_ice_potential_temperature(full_ocean_atmos)
+qˡ_f = full_ocean_atmos.microphysical_fields.qˡ
+
+full_sim.output_writers[:atmos] = JLD2Writer(full_model, (; θ=θ_f, u=u_f, qˡ=qˡ_f, w=w_f),
+                                             filename = &quot;full_ocean_atmos&quot;,
+                                             schedule = TimeInterval(1minute),
+                                             overwrite_existing = true)
+
+full_sim.output_writers[:ocean] = JLD2Writer(full_model, (; T=ocean.model.tracers.T),
+                                             filename = &quot;ocean_full&quot;,
+                                             schedule = TimeInterval(1minute),
+                                             overwrite_existing = true)
+
+u_nh, v_nh, w_nh = nh_ocean_atmos.velocities
+θ_nh = liquid_ice_potential_temperature(nh_ocean_atmos)
+qˡ_nh = nh_ocean_atmos.microphysical_fields.qˡ
+
+nh_sim.output_writers[:atmos] = JLD2Writer(nh_model, (; θ=θ_nh, u=u_nh, qˡ=qˡ_nh, w=w_nh),
+                                           filename = &quot;nh_ocean_atmos&quot;,
+                                           schedule = TimeInterval(1minute),
+                                           overwrite_existing = true)
+
+nh_sim.output_writers[:ocean] = JLD2Writer(nh_model, (; T=nh_ocean.model.tracers.T),
+                                           filename = &quot;ocean_nh&quot;,
+                                           schedule = TimeInterval(1minute),
+                                           overwrite_existing = true)</code></pre><pre><code class="nohighlight hljs">JLD2Writer scheduled on TimeInterval(1 minute):
+├── filepath: ocean_nh.jld2
+├── 1 outputs: T
+├── array_type: Array{Float32}
+├── including: ()
+├── file_splitting: NoFileSplitting
+└── file size: 0 bytes (file not yet created)</code></pre><h2 id="Run-all-four-simulations-sequentially"><a class="docs-heading-anchor" href="#Run-all-four-simulations-sequentially">Run all four simulations sequentially</a><a id="Run-all-four-simulations-sequentially-1"></a><a class="docs-heading-anchor-permalink" href="#Run-all-four-simulations-sequentially" title="Permalink"></a></h2><pre><code class="language-julia hljs">@info &quot;Running prescribed ocean coupled simulation...&quot;
+run!(prescribed_sim)
+@info &quot;Prescribed ocean simulation complete.&quot;
+
+@info &quot;Running slab ocean coupled simulation...&quot;
+run!(slab_sim)
+@info &quot;Slab ocean simulation complete.&quot;
+
+@info &quot;Running full ocean coupled simulation...&quot;
+run!(full_sim)
+@info &quot;Full ocean simulation complete.&quot;
+
+@info &quot;Running nonhydrostatic ocean coupled simulation...&quot;
+run!(nh_sim)
+@info &quot;Nonhydrostatic ocean simulation complete.&quot;</code></pre><pre><code class="nohighlight hljs">[ Info: Running prescribed ocean coupled simulation...
+[ Info: Initializing simulation...
+[ Info: [Prescribed] Iter: 0, t = 0 seconds, max|u|: 1.00e+01, max|w|: 0.00e+00, SST: 290.000 (fixed)
+[ Info:     ... simulation initialization complete (25.478 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (10.866 seconds).
+[ Info: [Prescribed] Iter: 400, t = 33.333 minutes, max|u|: 1.78e+01, max|w|: 1.04e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 800, t = 1.111 hours, max|u|: 2.31e+01, max|w|: 2.05e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 1200, t = 1.667 hours, max|u|: 3.28e+01, max|w|: 2.15e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 1600, t = 2.222 hours, max|u|: 3.57e+01, max|w|: 2.12e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 2000, t = 2.778 hours, max|u|: 3.92e+01, max|w|: 3.49e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 2400, t = 3.333 hours, max|u|: 3.77e+01, max|w|: 3.57e+01, SST: 290.000 (fixed)
+[ Info: [Prescribed] Iter: 2800, t = 3.889 hours, max|u|: 4.67e+01, max|w|: 3.92e+01, SST: 290.000 (fixed)
+[ Info: Simulation is stopping after running for 1.397 minutes.
+[ Info: Simulation time 4 hours equals or exceeds stop time 4 hours.
+[ Info: Prescribed ocean simulation complete.
+[ Info: Running slab ocean coupled simulation...
+[ Info: Initializing simulation...
+[ Info: [Slab] Iter: 0, t = 0 seconds, max|u|: 1.00e+01, max|w|: 0.00e+00, SST: (290.000, 290.000)
+[ Info:     ... simulation initialization complete (8.064 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (369.224 ms).
+[ Info: [Slab] Iter: 400, t = 33.333 minutes, max|u|: 1.92e+01, max|w|: 1.19e+01, SST: (289.943, 289.947)
+[ Info: [Slab] Iter: 800, t = 1.111 hours, max|u|: 2.92e+01, max|w|: 1.65e+01, SST: (289.893, 289.903)
+[ Info: [Slab] Iter: 1200, t = 1.667 hours, max|u|: 3.56e+01, max|w|: 2.35e+01, SST: (289.819, 289.845)
+[ Info: [Slab] Iter: 1600, t = 2.222 hours, max|u|: 4.18e+01, max|w|: 2.99e+01, SST: (289.737, 289.772)
+[ Info: [Slab] Iter: 2000, t = 2.778 hours, max|u|: 3.60e+01, max|w|: 3.38e+01, SST: (289.647, 289.675)
+[ Info: [Slab] Iter: 2400, t = 3.333 hours, max|u|: 4.31e+01, max|w|: 3.50e+01, SST: (289.522, 289.588)
+[ Info: [Slab] Iter: 2800, t = 3.889 hours, max|u|: 4.30e+01, max|w|: 4.98e+01, SST: (289.419, 289.480)
+[ Info: Simulation is stopping after running for 1.107 minutes.
+[ Info: Simulation time 4 hours equals or exceeds stop time 4 hours.
+[ Info: Slab ocean simulation complete.
+[ Info: Running full ocean coupled simulation...
+[ Info: Initializing simulation...
+[ Info: [Full] Iter: 0, t = 0 seconds, max|u|: 1.00e+01, max|w|: 0.00e+00, SST: (16.850, 16.850)
+[ Info:     ... simulation initialization complete (4.432 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (15.793 seconds).
+[ Info: [Full] Iter: 400, t = 33.333 minutes, max|u|: 1.85e+01, max|w|: 1.20e+01, SST: (16.788, 16.791)
+[ Info: [Full] Iter: 800, t = 1.111 hours, max|u|: 2.94e+01, max|w|: 1.86e+01, SST: (16.740, 16.752)
+[ Info: [Full] Iter: 1200, t = 1.667 hours, max|u|: 3.56e+01, max|w|: 2.74e+01, SST: (16.694, 16.712)
+[ Info: [Full] Iter: 1600, t = 2.222 hours, max|u|: 3.48e+01, max|w|: 2.79e+01, SST: (16.643, 16.672)
+[ Info: [Full] Iter: 2000, t = 2.778 hours, max|u|: 3.58e+01, max|w|: 3.37e+01, SST: (16.591, 16.625)
+[ Info: [Full] Iter: 2400, t = 3.333 hours, max|u|: 3.92e+01, max|w|: 3.63e+01, SST: (16.536, 16.563)
+[ Info: [Full] Iter: 2800, t = 3.889 hours, max|u|: 3.96e+01, max|w|: 4.08e+01, SST: (16.495, 16.511)
+[ Info: Simulation is stopping after running for 1.889 minutes.
+[ Info: Simulation time 4 hours equals or exceeds stop time 4 hours.
+[ Info: Full ocean simulation complete.
+[ Info: Running nonhydrostatic ocean coupled simulation...
+[ Info: Initializing simulation...
+[ Info: [NH] Iter: 0, t = 0 seconds, max|u|: 1.00e+01, max|w|: 0.00e+00, SST: (16.850, 16.850)
+[ Info:     ... simulation initialization complete (2.214 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (5.147 seconds).
+[ Info: [NH] Iter: 400, t = 33.333 minutes, max|u|: 1.70e+01, max|w|: 1.01e+01, SST: (16.281, 16.328)
+[ Info: [NH] Iter: 800, t = 1.111 hours, max|u|: 3.10e+01, max|w|: 2.49e+01, SST: (15.771, 15.974)
+[ Info: [NH] Iter: 1200, t = 1.667 hours, max|u|: 2.95e+01, max|w|: 1.94e+01, SST: (15.099, 15.537)
+[ Info: [NH] Iter: 1600, t = 2.222 hours, max|u|: 4.56e+01, max|w|: 2.91e+01, SST: (13.479, 15.034)
+[ Info: [NH] Iter: 2000, t = 2.778 hours, max|u|: 3.82e+01, max|w|: 3.15e+01, SST: (12.021, 14.960)
+[ Info: [NH] Iter: 2400, t = 3.333 hours, max|u|: 3.51e+01, max|w|: 3.94e+01, SST: (13.546, 15.078)
+[ Info: [NH] Iter: 2800, t = 3.889 hours, max|u|: 4.15e+01, max|w|: 4.08e+01, SST: (8.734, 15.015)
+[ Info: Simulation is stopping after running for 1.529 minutes.
+[ Info: Simulation time 4 hours equals or exceeds stop time 4 hours.
+[ Info: Nonhydrostatic ocean simulation complete.
+</code></pre><h2 id="Animation"><a class="docs-heading-anchor" href="#Animation">Animation</a><a id="Animation-1"></a><a class="docs-heading-anchor-permalink" href="#Animation" title="Permalink"></a></h2><p>The animation has five columns:</p><ul><li><strong>Column 1</strong>: atmosphere over prescribed ocean (θ, u) and SST comparison line plot</li><li><strong>Column 2</strong>: atmosphere over slab ocean (θ, u) — same layout</li><li><strong>Column 3</strong>: atmosphere over hydrostatic ocean (cloud water, w) and ocean T cross-section</li><li><strong>Column 4</strong>: atmosphere over nonhydrostatic ocean (cloud water, w) and ocean T cross-section</li><li><strong>Column 5</strong> (narrow): horizontal-mean vertical profiles from all four simulations</li></ul><p>The SST comparison converts the full/NH ocean surface temperature from °C to K so all curves are on the same Kelvin scale as the slab and prescribed oceans.</p><pre><code class="language-julia hljs">using CairoMakie
+
+θ_prescribed_ts = FieldTimeSeries(&quot;prescribed_ocean_atmos.jld2&quot;, &quot;θ&quot;; grid)
+u_prescribed_ts = FieldTimeSeries(&quot;prescribed_ocean_atmos.jld2&quot;, &quot;u&quot;; grid)
+
+θ_slab_ts = FieldTimeSeries(&quot;slab_ocean_atmos.jld2&quot;, &quot;θ&quot;; grid)
+u_slab_ts = FieldTimeSeries(&quot;slab_ocean_atmos.jld2&quot;, &quot;u&quot;; grid)
+sst_slab_ts = FieldTimeSeries(&quot;sst_slab.jld2&quot;, &quot;SST&quot;; grid=sst_grid)
+
+θ_full_ts = FieldTimeSeries(&quot;full_ocean_atmos.jld2&quot;, &quot;θ&quot;; grid)
+u_full_ts = FieldTimeSeries(&quot;full_ocean_atmos.jld2&quot;, &quot;u&quot;; grid)
+qˡ_full_ts = FieldTimeSeries(&quot;full_ocean_atmos.jld2&quot;, &quot;qˡ&quot;; grid)
+w_full_ts = FieldTimeSeries(&quot;full_ocean_atmos.jld2&quot;, &quot;w&quot;; grid)
+T_ocean_ts = FieldTimeSeries(&quot;ocean_full.jld2&quot;, &quot;T&quot;; grid=ocean_grid)
+
+θ_nh_ts = FieldTimeSeries(&quot;nh_ocean_atmos.jld2&quot;, &quot;θ&quot;; grid)
+u_nh_ts = FieldTimeSeries(&quot;nh_ocean_atmos.jld2&quot;, &quot;u&quot;; grid)
+qˡ_nh_ts = FieldTimeSeries(&quot;nh_ocean_atmos.jld2&quot;, &quot;qˡ&quot;; grid)
+w_nh_ts = FieldTimeSeries(&quot;nh_ocean_atmos.jld2&quot;, &quot;w&quot;; grid)
+T_nh_ts = FieldTimeSeries(&quot;ocean_nh.jld2&quot;, &quot;T&quot;; grid=nh_ocean_grid)
+
+times = θ_slab_ts.times
+Nt = length(times)
+Nzᵒᶜ = size(ocean_grid, 3)
+Nzⁿʰ = size(nh_ocean_grid, 3)</code></pre><pre><code class="nohighlight hljs">50</code></pre><p>Coordinate arrays for manual line plots.</p><pre><code class="language-julia hljs">x_ocean = xnodes(ocean_grid, Center())
+x_nh = xnodes(nh_ocean_grid, Center())</code></pre><pre><code class="nohighlight hljs">-9843.75:312.5:9843.75</code></pre><h3 id="Figure-layout"><a class="docs-heading-anchor" href="#Figure-layout">Figure layout</a><a id="Figure-layout-1"></a><a class="docs-heading-anchor-permalink" href="#Figure-layout" title="Permalink"></a></h3><pre><code class="language-julia hljs">fig = Figure(size = (2400, 900), fontsize = 12)
+
+ax_θ_p = Axis(fig[1, 1], title=&quot;θₗᵢ (K) — atmos (prescribed)&quot;, ylabel=&quot;z (m)&quot;)
+ax_u_p = Axis(fig[2, 1], title=&quot;u (m/s) — atmos (prescribed)&quot;, ylabel=&quot;z (m)&quot;)
+ax_sst = Axis(fig[3, 1], title=&quot;SST (K)&quot;,                       xlabel=&quot;x (m)&quot;, ylabel=&quot;SST (K)&quot;)
+
+ax_θ   = Axis(fig[1, 2], title=&quot;θₗᵢ (K) — atmos (slab)&quot;, ylabel=&quot;z (m)&quot;)
+ax_u   = Axis(fig[2, 2], title=&quot;u (m/s) — atmos (slab)&quot;, ylabel=&quot;z (m)&quot;)
+ax_oT  = Axis(fig[3, 2], title=&quot;Ocean T (°C) — hydrostatic&quot;, xlabel=&quot;x (m)&quot;, ylabel=&quot;z (m)&quot;)
+
+ax_qˡ = Axis(fig[1, 3], title=&quot;Cloud water — atmos (hydrostatic)&quot;, ylabel=&quot;z (m)&quot;)
+ax_w  = Axis(fig[2, 3], title=&quot;w (m/s) — atmos (hydrostatic)&quot;,     ylabel=&quot;z (m)&quot;)
+ax_oT_nh = Axis(fig[3, 3], title=&quot;Ocean T (°C) — NH&quot;,              xlabel=&quot;x (m)&quot;, ylabel=&quot;z (m)&quot;)
+
+ax_qˡ_nh = Axis(fig[1, 4], title=&quot;Cloud water — atmos (NH)&quot;, ylabel=&quot;z (m)&quot;)
+ax_w_nh  = Axis(fig[2, 4], title=&quot;w (m/s) — atmos (NH)&quot;,     ylabel=&quot;z (m)&quot;)
+ax_Tp    = Axis(fig[3, 4], title=&quot;⟨T⟩(z)&quot;, xlabel=&quot;T (°C)&quot;,  ylabel=&quot;z (m)&quot;)
+
+ax_θp = Axis(fig[1, 5], title=&quot;⟨θ⟩(z)&quot;, xlabel=&quot;θ (K)&quot;,   ylabel=&quot;z (m)&quot;, limits=((θᵃᵗ-1, θᵃᵗ+4), nothing))
+ax_up = Axis(fig[2, 5], title=&quot;⟨u⟩(z)&quot;, xlabel=&quot;u (m/s)&quot;, ylabel=&quot;z (m)&quot;, limits=((-10, 25), nothing))
+
+colsize!(fig.layout, 5, Relative(0.10))
+
+for ax in (ax_θ_p, ax_u_p, ax_θ, ax_u, ax_qˡ, ax_w, ax_qˡ_nh, ax_w_nh)
+    hidexdecorations!(ax, ticks=false)
+end</code></pre><h3 id="Observables"><a class="docs-heading-anchor" href="#Observables">Observables</a><a id="Observables-1"></a><a class="docs-heading-anchor-permalink" href="#Observables" title="Permalink"></a></h3><pre><code class="language-julia hljs">n = Observable(1)</code></pre><pre><code class="nohighlight hljs">Observable(1)
+</code></pre><p>Column 1 — prescribed atmosphere</p><pre><code class="language-julia hljs">θn_p = @lift θ_prescribed_ts[$n]
+un_p = @lift u_prescribed_ts[$n]</code></pre><pre><code class="nohighlight hljs">Observable(64×1×64 Field{Oceananigans.Grids.Face, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.RectilinearGrid on CPU
+├── grid: 64×1×64 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: Periodic, east: Periodic, south: Nothing, north: Nothing, bottom: ZeroFlux, top: ZeroFlux, immersed: Nothing
+└── data: 74×1×74 OffsetArray(view(::Array{Float64, 4}, :, :, :, 1), -4:69, 1:1, -4:69) with eltype Float64 with indices -4:69×1:1×-4:69
+    └── max=10.0, min=10.0, mean=10.0)
+</code></pre><p>Column 2 — slab atmosphere</p><pre><code class="language-julia hljs">θn = @lift θ_slab_ts[$n]
+un = @lift u_slab_ts[$n]
+sstn_slab = @lift sst_slab_ts[$n]</code></pre><pre><code class="nohighlight hljs">Observable(64×1×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.RectilinearGrid on CPU
+├── grid: 64×1×1 RectilinearGrid{Float64, Periodic, Flat, Flat} on CPU with 5×0×0 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: Periodic, east: Periodic, south: Nothing, north: Nothing, bottom: Nothing, top: Nothing, immersed: Nothing
+└── data: 74×1×1 OffsetArray(view(::Array{Float64, 4}, :, :, :, 1), -4:69, 1:1, 1:1) with eltype Float64 with indices -4:69×1:1×1:1
+    └── max=290.0, min=290.0, mean=290.0)
+</code></pre><p>SST comparison (convert °C to K for full/NH)</p><pre><code class="language-julia hljs">ocean_sst_kelvin = @lift interior(T_ocean_ts[$n], :, 1, Nzᵒᶜ) .+ celsius_to_kelvin
+nh_sst_kelvin    = @lift interior(T_nh_ts[$n], :, 1, Nzⁿʰ) .+ celsius_to_kelvin</code></pre><pre><code class="nohighlight hljs">Observable([290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697, 290.0000003814697])
+</code></pre><p>Column 3 — hydrostatic atmosphere</p><pre><code class="language-julia hljs">qˡn = @lift qˡ_full_ts[$n]
+wn  = @lift w_full_ts[$n]
+oTn = @lift T_ocean_ts[$n]</code></pre><pre><code class="nohighlight hljs">Observable(64×1×20 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.RectilinearGrid on CPU
+├── grid: 64×1×20 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: Periodic, east: Periodic, south: Nothing, north: Nothing, bottom: ZeroFlux, top: Flux, immersed: Nothing
+└── data: 74×1×30 OffsetArray(view(::Array{Float64, 4}, :, :, :, 1), -4:69, 1:1, -4:25) with eltype Float64 with indices -4:69×1:1×-4:25
+    └── max=16.85, min=16.075, mean=16.53)
+</code></pre><p>Column 4 — nonhydrostatic atmosphere</p><pre><code class="language-julia hljs">qˡn_nh = @lift qˡ_nh_ts[$n]
+wn_nh  = @lift w_nh_ts[$n]
+oTn_nh = @lift T_nh_ts[$n]</code></pre><pre><code class="nohighlight hljs">Observable(64×1×50 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.RectilinearGrid on CPU
+├── grid: 64×1×50 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: Periodic, east: Periodic, south: Nothing, north: Nothing, bottom: ZeroFlux, top: Flux, immersed: Nothing
+└── data: 74×1×60 OffsetArray(view(::Array{Float64, 4}, :, :, :, 1), -4:69, 1:1, -4:55) with eltype Float64 with indices -4:69×1:1×-4:55
+    └── max=16.85, min=16.06, mean=16.53)
+</code></pre><p>Profile column — horizontal-mean profiles</p><pre><code class="language-julia hljs">θ_avg_prescribed = @lift Field(Average(θ_prescribed_ts[$n], dims=1))
+θ_avg_slab       = @lift Field(Average(θ_slab_ts[$n], dims=1))
+θ_avg_full       = @lift Field(Average(θ_full_ts[$n], dims=1))
+θ_avg_nh         = @lift Field(Average(θ_nh_ts[$n], dims=1))
+u_avg_prescribed = @lift Field(Average(u_prescribed_ts[$n], dims=1))
+u_avg_slab       = @lift Field(Average(u_slab_ts[$n], dims=1))
+u_avg_full       = @lift Field(Average(u_full_ts[$n], dims=1))
+u_avg_nh         = @lift Field(Average(u_nh_ts[$n], dims=1))
+T_avg_ocean      = @lift Field(Average(T_ocean_ts[$n], dims=1))
+T_avg_nh         = @lift Field(Average(T_nh_ts[$n], dims=1))</code></pre><pre><code class="nohighlight hljs">Observable(1×1×50 Field{Nothing, Oceananigans.Grids.Center, Oceananigans.Grids.Center} reduced over dims = (1,) on Oceananigans.Grids.RectilinearGrid on CPU
+├── data: OffsetArrays.OffsetArray{Float64, 3, Array{Float64, 3}}, size: (1, 1, 50)
+├── grid: 64×1×50 RectilinearGrid{Float64, Periodic, Flat, Bounded} on CPU with 5×0×5 halo
+├── operand: Average of 64×1×50 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.RectilinearGrid on CPU over dims (1,)
+├── status: time=0.0
+└── data: 1×1×60 OffsetArray(::Array{Float64, 3}, 1:1, 1:1, -4:55) with eltype Float64 with indices 1:1×1:1×-4:55
+    └── max=16.85, min=16.06, mean=16.53)
+</code></pre><p>Convert slab SST from K to °C for the ocean T profile comparison</p><pre><code class="language-julia hljs">sst_avg_celsius        = @lift fill(mean(sst_slab_ts[$n]) - celsius_to_kelvin, 2)
+prescribed_avg_celsius = fill(Tᵒᶜ - celsius_to_kelvin, 2) # constant</code></pre><pre><code class="nohighlight hljs">2-element Vector{Float64}:
+ 16.850000000000023
+ 16.850000000000023</code></pre><h3 id="Plot"><a class="docs-heading-anchor" href="#Plot">Plot</a><a id="Plot-1"></a><a class="docs-heading-anchor-permalink" href="#Plot" title="Permalink"></a></h3><pre><code class="language-julia hljs">heatmap!(ax_θ_p, θn_p; colormap=:thermal, colorrange=(θᵃᵗ - 1, θᵃᵗ + 3))
+heatmap!(ax_u_p, un_p; colormap=:balance,  colorrange=(-30, 30))
+
+heatmap!(ax_θ,  θn;  colormap=:thermal,          colorrange=(θᵃᵗ - 1, θᵃᵗ + 3))
+heatmap!(ax_u,  un;  colormap=:balance,          colorrange=(-30, 30))
+heatmap!(ax_oT, oTn; colormap=:thermal,          colorrange=(T₀ - 1.5, T₀ + 0.5))
+
+heatmap!(ax_qˡ, qˡn; colormap=Reverse(:Blues_4), colorrange=(0, 5e-4))
+heatmap!(ax_w,  wn;  colormap=:balance,          colorrange=(-25, 25))
+heatmap!(ax_oT_nh, oTn_nh; colormap=:thermal,    colorrange=(T₀ - 1.5, T₀ + 0.5))
+
+heatmap!(ax_qˡ_nh, qˡn_nh; colormap=Reverse(:Blues_4), colorrange=(0, 5e-4))
+heatmap!(ax_w_nh,  wn_nh;  colormap=:balance,          colorrange=(-25, 25))
+
+hlines!(ax_sst, Tᵒᶜ;                       color=:black, linewidth=2, label=&quot;Prescribed&quot;)
+lines!(ax_sst, sstn_slab;                  color=:red,   linewidth=2, label=&quot;Slab (10m)&quot;)
+lines!(ax_sst, x_ocean, ocean_sst_kelvin;  color=:blue,  linewidth=2, label=&quot;Hydrostatic&quot;)
+lines!(ax_sst, x_nh, nh_sst_kelvin;        color=:green, linewidth=2, label=&quot;NH&quot;)
+axislegend(ax_sst, position=:rb)
+ylims!(ax_sst, Tᵒᶜ - 0.7, Tᵒᶜ + 0.2)
+
+lines!(ax_θp, θ_avg_prescribed; color=:black, linewidth=1.5, label=&quot;Prescribed&quot;)
+lines!(ax_θp, θ_avg_slab;       color=:red,   linewidth=1.5, label=&quot;Slab&quot;)
+lines!(ax_θp, θ_avg_full;       color=:blue,  linewidth=1.5, label=&quot;Hydro&quot;)
+lines!(ax_θp, θ_avg_nh;         color=:green, linewidth=1.5, label=&quot;NH&quot;)
+axislegend(ax_θp, position=:rt)
+
+lines!(ax_up, u_avg_prescribed; color=:black, linewidth=1.5)
+lines!(ax_up, u_avg_slab;       color=:red,   linewidth=1.5)
+lines!(ax_up, u_avg_full;       color=:blue,  linewidth=1.5)
+lines!(ax_up, u_avg_nh;         color=:green, linewidth=1.5)
+
+lines!(ax_Tp, T_avg_ocean;                              color=:blue,  linewidth=1.5, label=&quot;Hydro&quot;)
+lines!(ax_Tp, T_avg_nh;                                 color=:green, linewidth=1.5, label=&quot;NH&quot;)
+lines!(ax_Tp, sst_avg_celsius,        [-50.0, 0.0];     color=:red,   linewidth=1.5, label=&quot;Slab&quot;)
+lines!(ax_Tp, prescribed_avg_celsius,  [-50.0, 0.0];    color=:black, linewidth=1.5, label=&quot;Prescribed&quot;)
+axislegend(ax_Tp, position=:lb)
+xlims!(ax_Tp, T₀ - 1, T₀ + 0.5)
+
+title = @lift &quot;Atmosphere–ocean coupling comparison, t = &quot; * prettytime(times[$n])
+Label(fig[0, 1:5], title, fontsize=16)</code></pre><pre><code class="nohighlight hljs">Makie.Label()</code></pre><h3 id="Record"><a class="docs-heading-anchor" href="#Record">Record</a><a id="Record-1"></a><a class="docs-heading-anchor-permalink" href="#Record" title="Permalink"></a></h3><pre><code class="language-julia hljs">@info &quot;Rendering animation...&quot;
+record(fig, &quot;breeze_over_four_oceans.mp4&quot;, 1:Nt; framerate=12) do nn
+    n[] = nn
+end
+
+@info &quot;Animation saved.&quot;</code></pre><pre><code class="nohighlight hljs">[ Info: Rendering animation...
+[ Info: Animation saved.
+</code></pre><p><video src="../breeze_over_four_oceans.mp4" controls="true" title><a href="../breeze_over_four_oceans.mp4"></a></video></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../global_climate_simulation/">« Global climate simulation</a><a class="docs-footer-nextpage" href="../ERA5_hourly_data/">ERA5 hourly data »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Tuesday 26 May 2026 22:35">Tuesday 26 May 2026</span>. Using Julia version 1.12.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

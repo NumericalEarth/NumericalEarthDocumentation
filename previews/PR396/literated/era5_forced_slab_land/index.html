@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>ERA5-forced slab land · NumericalEarth.jl</title><meta name="title" content="ERA5-forced slab land · NumericalEarth.jl"/><meta property="og:title" content="ERA5-forced slab land · NumericalEarth.jl"/><meta property="twitter:title" content="ERA5-forced slab land · NumericalEarth.jl"/><meta name="description" content="Documentation for NumericalEarth.jl."/><meta property="og:description" content="Documentation for NumericalEarth.jl."/><meta property="twitter:description" content="Documentation for NumericalEarth.jl."/><meta property="og:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/era5_forced_slab_land/"/><meta property="twitter:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/era5_forced_slab_land/"/><link rel="canonical" href="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/era5_forced_slab_land/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">NumericalEarth.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><a class="tocitem" href="../../earth_system_model/">EarthSystemModel</a></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../single_column_os_papa_simulation/">Single-column ocean simulation</a></li><li><a class="tocitem" href="../coupled_conservation/">Coupled energy and freshwater conservation</a></li><li><a class="tocitem" href="../exploring_era5_reanalysis_data/">ERA5 and GloFAS reanalysis data</a></li><li class="is-active"><a class="tocitem" href>ERA5-forced slab land</a><ul class="internal"><li><a class="tocitem" href="#Elevation-downscaling"><span>Elevation downscaling</span></a></li><li><a class="tocitem" href="#CDS-API-credentials"><span>CDS API credentials</span></a></li><li><a class="tocitem" href="#Domain-—-2-2-Yellowstone-box-at-1-km"><span>Domain — 2° × 2° Yellowstone box at ~1 km</span></a></li><li><a class="tocitem" href="#ETOPO-surface-elevation"><span>ETOPO surface elevation</span></a></li><li><a class="tocitem" href="#ERA5-forcing-—-3-day-window"><span>ERA5 forcing — 3-day window</span></a></li><li><a class="tocitem" href="#Elevation-correction"><span>Elevation correction</span></a></li><li><a class="tocitem" href="#Slab-land"><span>Slab land</span></a></li><li><a class="tocitem" href="#Coupled-model"><span>Coupled model</span></a></li><li><a class="tocitem" href="#Run"><span>Run</span></a></li><li><a class="tocitem" href="#Animation"><span>Animation</span></a></li></ul></li><li><a class="tocitem" href="../breeze_over_slab_land/">Breeze over slab land</a></li></ul></li><li><a class="tocitem" href="../../vertical_grids/">Vertical grids</a></li><li><span class="tocitem">Metadata</span><ul><li><a class="tocitem" href="../../Metadata/metadata_overview/">Overview</a></li><li><a class="tocitem" href="../../Metadata/supported_variables/">Supported variables</a></li></ul></li><li><a class="tocitem" href="../../interface_fluxes/">Interface fluxes</a></li><li><span class="tocitem">Appendix</span><ul><li><a class="tocitem" href="../../appendix/notation/">Notation</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../library/outline/">Contents</a></li><li><a class="tocitem" href="../../library/public_api/">Public API</a></li><li><a class="tocitem" href="../../library/private_api/">Private API</a></li><li><a class="tocitem" href="../../library/function_index/">Function index</a></li></ul></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>ERA5-forced slab land</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>ERA5-forced slab land</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl/blob/main/examples/era5_forced_slab_land.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="ERA5-forced-slab-land-—-Greater-Yellowstone-at-1-km"><a class="docs-heading-anchor" href="#ERA5-forced-slab-land-—-Greater-Yellowstone-at-1-km">ERA5-forced slab land — Greater Yellowstone at ~1 km</a><a id="ERA5-forced-slab-land-—-Greater-Yellowstone-at-1-km-1"></a><a class="docs-heading-anchor-permalink" href="#ERA5-forced-slab-land-—-Greater-Yellowstone-at-1-km" title="Permalink"></a></h1><p>A high-resolution land-only simulation over the Greater Yellowstone region, forced by ERA5 reanalysis and elevation-corrected with ETOPO 2022 topography so subgrid mountains <em>are</em> visible in the skin temperature field.</p><p>The domain covers roughly 43.25–45.25 °N × 111–109 °W (~220 × 156 km), capturing Yellowstone Plateau, the Tetons, Jackson Hole, the northern Wind Rivers, and the Madison/Gallatin valleys at 200 × 200 = 40 000 cells (≈ 1 km).</p><p><code>SlabLand</code> composes</p><pre><code class="nohighlight hljs">energy    = SlabEnergy(dry_heat_capacity = ρcH_g)
+hydrology = BucketHydrology(...)</code></pre><p>(roughness lengths are set on the atmosphere-land flux closure, not the land)</p><p>coupled through <code>AtmosphereLandModel</code> to an <a href="../../library/public_api/#NumericalEarth.DataWrangling.ERA5.ERA5PrescribedAtmosphere"><code>ERA5PrescribedAtmosphere</code></a> and <a href="../../library/public_api/#NumericalEarth.DataWrangling.ERA5.ERA5PrescribedRadiation"><code>ERA5PrescribedRadiation</code></a>: these download the required ERA5 single-level fields (T₂ₘ, dewpoint, 10 m wind, surface pressure, total precipitation, downwelling SW/LW) over the domain, derive specific humidity from the dewpoint, and convert ERA5&#39;s accumulated radiation/precipitation to fluxes. They live on the ERA5 native grid; the coupled model interpolates them onto the 1 km land exchange grid.</p><h2 id="Elevation-downscaling"><a class="docs-heading-anchor" href="#Elevation-downscaling">Elevation downscaling</a><a id="Elevation-downscaling-1"></a><a class="docs-heading-anchor-permalink" href="#Elevation-downscaling" title="Permalink"></a></h2><p><code>SlabLand</code> itself has no terrain knowledge, and ERA5&#39;s T₂ₘ is at its own ~28 km grid-cell mean elevation (~2 km in this domain). To make the 1 km grid show elevation-driven temperature contrasts we apply a moist-environmental lapse-rate correction for the elevation difference</p><pre><code class="nohighlight hljs">Δz(λ, φ) = z_ETOPO(λ, φ) − z_ERA5(λ, φ)</code></pre><p>where <code>z_ERA5</code> is ERA5&#39;s own surface elevation (its surface geopotential ÷ g). The correction <code>T ← T − Γ Δz</code> (Γ = 6.5 K km⁻¹) with a hydrostatic pressure adjustment is applied at run time by the coupled model&#39;s state exchanger (<a href="../../library/public_api/#NumericalEarth.EarthSystemModels.InterfaceComputations.ElevationCorrection"><code>ElevationCorrection</code></a>) — the prescribed atmosphere carries raw ERA5 fields, and the same correction would apply to a live atmosphere. Specific humidity is conserved through the lift.</p><p>Net effect: ~2 km elevation contrast between the Snake River Plain floor and the Wind River summits → ≈ 13 K skin-temperature spread from topography alone, on top of the synoptic + diurnal variability ERA5 already carries.</p><h2 id="CDS-API-credentials"><a class="docs-heading-anchor" href="#CDS-API-credentials">CDS API credentials</a><a id="CDS-API-credentials-1"></a><a class="docs-heading-anchor-permalink" href="#CDS-API-credentials" title="Permalink"></a></h2><p>Downloading ERA5 fields requires CDS API credentials at <code>~/.cdsapirc</code>; see <a href="https://cds.climate.copernicus.eu/how-to-api">https://cds.climate.copernicus.eu/how-to-api</a>.</p><pre><code class="language-julia hljs">using NumericalEarth
+using Oceananigans
+using Oceananigans.Units
+using CDSAPI                         # activates the CDS-API extension
+using CairoMakie                     # rendered up-front: see note below the run
+using Printf
+using Statistics
+import Dates: DateTime, Hour         # `Dates.hour` clashes with `Oceananigans.Units.hour`</code></pre><pre><code class="nohighlight hljs">[ Info: Oceananigans will use 8 threads
+</code></pre><h2 id="Domain-—-2-2-Yellowstone-box-at-1-km"><a class="docs-heading-anchor" href="#Domain-—-2-2-Yellowstone-box-at-1-km">Domain — 2° × 2° Yellowstone box at ~1 km</a><a id="Domain-—-2-2-Yellowstone-box-at-1-km-1"></a><a class="docs-heading-anchor-permalink" href="#Domain-—-2-2-Yellowstone-box-at-1-km" title="Permalink"></a></h2><pre><code class="language-julia hljs">arch  = CPU()
+
+latitude = lat_min, lat_max = 43.25, 45.25
+longitude = lon_min, lon_max = -111.0, -109.0</code></pre><pre><code class="nohighlight hljs">(-111.0, -109.0)</code></pre><p>The slab land is a 2D surface, so the grid is <code>Flat</code> in the vertical.</p><pre><code class="language-julia hljs">land_grid = LatitudeLongitudeGrid(arch; latitude, longitude,
+                                  size = (200, 200),
+                                  topology  = (Bounded, Bounded, Flat))</code></pre><pre><code class="nohighlight hljs">200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── longitude: Bounded  λ ∈ [-111.0, -109.0] regularly spaced with Δλ=0.01
+├── latitude:  Bounded  φ ∈ [43.25, 45.25]   regularly spaced with Δφ=0.01
+└── z:         Flat z                        </code></pre><h2 id="ETOPO-surface-elevation"><a class="docs-heading-anchor" href="#ETOPO-surface-elevation">ETOPO surface elevation</a><a id="ETOPO-surface-elevation-1"></a><a class="docs-heading-anchor-permalink" href="#ETOPO-surface-elevation" title="Permalink"></a></h2><p><code>regrid_topography</code> regrids ETOPO 2022 onto the land grid as a positive land surface elevation (the topographic counterpart of <code>regrid_bathymetry</code>). This is the <em>desired</em> elevation the atmosphere is corrected to.</p><pre><code class="language-julia hljs">z_land = regrid_topography(land_grid; dataset = ETOPO2022())</code></pre><pre><code class="nohighlight hljs">200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Nothing} reduced over dims = (3,) on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── grid: 200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: ZeroFlux, east: ZeroFlux, south: ZeroFlux, north: ZeroFlux, bottom: Nothing, top: Nothing, immersed: Nothing
+└── data: 206×206×1 OffsetArray(::Array{Float64, 3}, -2:203, -2:203, 1:1) with eltype Float64 with indices -2:203×-2:203×1:1
+    └── max=3857.35, min=1153.55, mean=2498.39</code></pre><h2 id="ERA5-forcing-—-3-day-window"><a class="docs-heading-anchor" href="#ERA5-forcing-—-3-day-window">ERA5 forcing — 3-day window</a><a id="ERA5-forcing-—-3-day-window-1"></a><a class="docs-heading-anchor-permalink" href="#ERA5-forcing-—-3-day-window" title="Permalink"></a></h2><p>Three days of hourly data spans two diurnal cycles plus a synoptic pulse and keeps the download + simulation under ~10 min on CPU. <a href="../../library/public_api/#NumericalEarth.DataWrangling.ERA5.ERA5PrescribedAtmosphere"><code>ERA5PrescribedAtmosphere</code></a> and <a href="../../library/public_api/#NumericalEarth.DataWrangling.ERA5.ERA5PrescribedRadiation"><code>ERA5PrescribedRadiation</code></a> download the required single-level fields over <code>region</code>, derive specific humidity from the 2 m dewpoint, and convert ERA5&#39;s hourly-accumulated radiation (J m⁻²) and precipitation (m) to fluxes (W m⁻², kg m⁻² s⁻¹) — they return standard prescribed components on the ERA5 native grid, which the coupled model interpolates onto the 1 km land grid. The region is just the land domain; the dataset fetch center-brackets it by one native cell, so the downscaling is well-posed at the domain edges.</p><pre><code class="language-julia hljs">dataset    = ERA5HourlySingleLevel()
+dates      = DateTime(2020, 4, 1):Hour(1):DateTime(2020, 4, 3, 23)
+region     = BoundingBox(; latitude, longitude)
+start_date = first(dates)
+end_date   = last(dates)
+Nt         = length(dates)
+
+atmosphere = ERA5PrescribedAtmosphere(arch; dataset, start_date, end_date, region,
+                                      surface_layer_height  = 10,
+                                      boundary_layer_height = 800)
+
+radiation = ERA5PrescribedRadiation(arch; dataset, start_date, end_date, region,
+                                    land_surface = SurfaceRadiationProperties(0.18, 0.95))</code></pre><pre><code class="nohighlight hljs">9×10×1×72 PrescribedRadiation on Oceananigans.Grids.LatitudeLongitudeGrid:
+├── times: 72-element StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}
+├── stefan_boltzmann_constant: 5.67037e-8
+└── surface_properties: (:ocean, :sea_ice, :land)</code></pre><h2 id="Elevation-correction"><a class="docs-heading-anchor" href="#Elevation-correction">Elevation correction</a><a id="Elevation-correction-1"></a><a class="docs-heading-anchor-permalink" href="#Elevation-correction" title="Permalink"></a></h2><p>ERA5&#39;s near-surface fields correspond to ERA5&#39;s own ~28 km grid-cell mean elevation (~2 km here). <a href="../../library/public_api/#NumericalEarth.EarthSystemModels.InterfaceComputations.ElevationCorrection"><code>ElevationCorrection</code></a> lifts the regridded atmosphere from that elevation (<code>z_era5</code>) to the 1 km ETOPO surface (<code>z_land</code>) with a moist lapse-rate shift + hydrostatic pressure adjustment, applied by the state exchanger every step (<code>q</code> conserved). <code>z_era5</code> is ERA5&#39;s model topography (its surface geopotential ÷ g → metres); the gravitational acceleration and gas constant the pressure adjustment needs are pulled from the atmosphere&#39;s thermodynamics, not hand-passed.</p><pre><code class="language-julia hljs">z_meta = Metadatum(:topography; dataset, date = start_date, region)
+z_era5 = Field(z_meta, land_grid)
+
+Δz = z_land - z_era5
+@info &quot;Elevation field stats&quot; land=extrema(z_land) era5=extrema(z_era5) Δz=extrema(Δz)
+
+Γ_lapse = 6.5e-3 # K m⁻¹  environmental lapse rate
+correction = ElevationCorrection(z_land, z_era5; lapse_rate = Γ_lapse)</code></pre><pre><code class="nohighlight hljs">NumericalEarth.EarthSystemModels.InterfaceComputations.ElevationCorrection{Oceananigans.Fields.Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center, Nothing, Oceananigans.Grids.LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat, Oceananigans.Grids.StaticVerticalDiscretization{Nothing, Nothing, Float64, Float64}, Float64, Float64, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, Float64, Float64, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, Float64, Float64, Oceananigans.Architectures.CPU, Int64}, Tuple{Colon, Colon, Colon}, OffsetArrays.OffsetArray{Float64, 3, Array{Float64, 3}}, Float64, Oceananigans.BoundaryConditions.FieldBoundaryConditions{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Nothing, Nothing, Nothing, @NamedTuple{bottom_and_top::Nothing, south_and_north::KernelAbstractions.Kernel{KernelAbstractions.CPU, KernelAbstractions.NDIteration.StaticSize{(200, 1)}, Oceananigans.Utils.OffsetStaticSize{(1:200, 1:1)}, typeof(Oceananigans.BoundaryConditions.cpu__fill_south_and_north_halo!)}, west_and_east::KernelAbstractions.Kernel{KernelAbstractions.CPU, KernelAbstractions.NDIteration.StaticSize{(200, 1)}, Oceananigans.Utils.OffsetStaticSize{(1:200, 1:1)}, typeof(Oceananigans.BoundaryConditions.cpu__fill_west_and_east_halo!)}}, @NamedTuple{bottom_and_top::Tuple{Nothing, Nothing}, south_and_north::Tuple{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition}, west_and_east::Tuple{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition}}}, Nothing, Nothing}, Oceananigans.Fields.Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Nothing, Nothing, Oceananigans.Grids.LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat, Oceananigans.Grids.StaticVerticalDiscretization{Nothing, Nothing, Float64, Float64}, Float64, Float64, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, Float64, Float64, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, OffsetArrays.OffsetVector{Float64, Vector{Float64}}, Float64, Float64, Oceananigans.Architectures.CPU, Int64}, Tuple{Colon, Colon, Colon}, OffsetArrays.OffsetArray{Float64, 3, Array{Float64, 3}}, Float64, Oceananigans.BoundaryConditions.FieldBoundaryConditions{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Nothing, Nothing, Nothing, @NamedTuple{bottom_and_top::Nothing, south_and_north::KernelAbstractions.Kernel{KernelAbstractions.CPU, KernelAbstractions.NDIteration.StaticSize{(200, 1)}, Oceananigans.Utils.OffsetStaticSize{(1:200, 1:1)}, typeof(Oceananigans.BoundaryConditions.cpu__fill_south_and_north_halo!)}, west_and_east::KernelAbstractions.Kernel{KernelAbstractions.CPU, KernelAbstractions.NDIteration.StaticSize{(200, 1)}, Oceananigans.Utils.OffsetStaticSize{(1:200, 1:1)}, typeof(Oceananigans.BoundaryConditions.cpu__fill_west_and_east_halo!)}}, @NamedTuple{bottom_and_top::Tuple{Nothing, Nothing}, south_and_north::Tuple{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition}, west_and_east::Tuple{Oceananigans.BoundaryConditions.NoFluxBoundaryCondition, Oceananigans.BoundaryConditions.NoFluxBoundaryCondition}}}, Nothing, Nothing}, Float64, Nothing}(200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── grid: 200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: ZeroFlux, east: ZeroFlux, south: ZeroFlux, north: ZeroFlux, bottom: Nothing, top: Nothing, immersed: Nothing
+└── data: 206×206×1 OffsetArray(::Array{Float64, 3}, -2:203, -2:203, 1:1) with eltype Float64 with indices -2:203×-2:203×1:1
+    └── max=2982.01, min=1303.05, mean=2452.01, 200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Nothing} reduced over dims = (3,) on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── grid: 200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── boundary conditions: FieldBoundaryConditions
+│   └── west: ZeroFlux, east: ZeroFlux, south: ZeroFlux, north: ZeroFlux, bottom: Nothing, top: Nothing, immersed: Nothing
+└── data: 206×206×1 OffsetArray(::Array{Float64, 3}, -2:203, -2:203, 1:1) with eltype Float64 with indices -2:203×-2:203×1:1
+    └── max=3857.35, min=1153.55, mean=2498.39, 0.0065, 0.0, 0.0, nothing)</code></pre><h2 id="Slab-land"><a class="docs-heading-anchor" href="#Slab-land">Slab land</a><a id="Slab-land-1"></a><a class="docs-heading-anchor-permalink" href="#Slab-land" title="Permalink"></a></h2><p><code>SlabLand</code> is purely energy + hydrology; aerodynamic roughness is a property of the atmosphere-land flux closure (set on the model below), not of the land.</p><pre><code class="language-julia hljs">dry_heat_capacity = 0.1 * 1500 * 1480
+slab_land = SlabLand(land_grid;
+                     energy = SlabEnergy(; dry_heat_capacity),
+                     hydrology = BucketHydrology(maximum_water_storage = 150))</code></pre><pre><code class="nohighlight hljs">SlabLand{Float64, CPU, LatitudeLongitudeGrid}(time = 0 seconds, iteration = 0)
+├── grid:          200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── energy:        ForceRestoreEnergy(dry_heat_capacity=222000.0, liquid_heat_capacity=4186.0, deep_temperature=0.0, deep_time_scale=Inf)
+├── hydrology:     BucketHydrology(maximum_water_storage=150.0)
+├── temperature:   200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── water_storage: 200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── saturation:    200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+└── fluxes:        (:net_energy_flux, :precipitation, :evaporation)</code></pre><p>Cold-start the skin temperature from the elevation-corrected ERA5 T₂ₘ at the first snapshot (interpolated onto the 1 km grid), mirroring the runtime lift.</p><pre><code class="language-julia hljs">T₀ = Field{Center, Center, Nothing}(land_grid)
+Oceananigans.Fields.interpolate!(T₀, atmosphere.temperature[1])
+set!(slab_land; T = T₀ - Γ_lapse * Δz, M = 0.5 * 150)</code></pre><pre><code class="nohighlight hljs">SlabLand{Float64, CPU, LatitudeLongitudeGrid}(time = 0 seconds, iteration = 0)
+├── grid:          200×200×1 LatitudeLongitudeGrid{Float64, Oceananigans.Grids.Bounded, Oceananigans.Grids.Bounded, Oceananigans.Grids.Flat} on CPU with 3×3×0 halo
+├── energy:        ForceRestoreEnergy(dry_heat_capacity=222000.0, liquid_heat_capacity=4186.0, deep_temperature=0.0, deep_time_scale=Inf)
+├── hydrology:     BucketHydrology(maximum_water_storage=150.0)
+├── temperature:   200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── water_storage: 200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+├── saturation:    200×200×1 Field{Oceananigans.Grids.Center, Oceananigans.Grids.Center, Oceananigans.Grids.Center} on Oceananigans.Grids.LatitudeLongitudeGrid on CPU
+└── fluxes:        (:net_energy_flux, :precipitation, :evaporation)</code></pre><h2 id="Coupled-model"><a class="docs-heading-anchor" href="#Coupled-model">Coupled model</a><a id="Coupled-model-1"></a><a class="docs-heading-anchor-permalink" href="#Coupled-model" title="Permalink"></a></h2><p>Roughness lengths live with the atmosphere-land flux closure: pass a <code>SimilarityTheoryFluxes</code> with the desired land roughness (0.1 m momentum, 0.01 m scalar here) via <code>atmosphere_land_fluxes</code>.</p><pre><code class="language-julia hljs">atmosphere_land_fluxes = SimilarityTheoryFluxes(momentum_roughness_length    = 0.1,
+                                                temperature_roughness_length = 0.01,
+                                                water_vapor_roughness_length = 0.01)
+
+model = AtmosphereLandModel(atmosphere, slab_land;
+                            radiation, atmosphere_land_fluxes,
+                            exchanger_correction = correction)
+
+simulation = Simulation(model; Δt = 5minutes, stop_time = (Nt - 1) * 3600)
+
+wall_time = Ref(time_ns())
+
+function progress(sim)
+    land = sim.model.land
+    Tmin, Tmax = minimum(land.temperature), maximum(land.temperature)
+    Wmin, Wmax = minimum(land.water_storage), maximum(land.water_storage)
+    𝒮mean      = mean(land.saturation)
+    Qmean      = mean(land.fluxes.net_energy_flux)
+    elapsed    = 1e-9 * (time_ns() - wall_time[]); wall_time[] = time_ns()
+    @info @sprintf(&quot;Iter %d  t = %s  T %.1f–%.1f K  W %.1f–%.1f kg m⁻²  ⟨𝒮⟩ %.2f  ⟨Q⟩ %+6.1f W m⁻²  wall Δ %.1fs&quot;,
+                   iteration(sim), prettytime(sim), Tmin, Tmax, Wmin, Wmax, 𝒮mean, Qmean, elapsed)
+    return nothing
+end
+add_callback!(simulation, progress, IterationInterval(144))  # ~12 h
+
+outputs = (T = slab_land.temperature,
+           W = slab_land.water_storage,
+           𝒮 = slab_land.saturation,
+           Q = slab_land.fluxes.net_energy_flux,
+           E = slab_land.fluxes.evaporation,
+           P = slab_land.fluxes.precipitation)
+
+simulation.output_writers[:land] = JLD2Writer(model, outputs;
+                                              filename = &quot;era5_forced_slab_land&quot;,
+                                              schedule = TimeInterval(1hour),
+                                              overwrite_existing = true)</code></pre><pre><code class="nohighlight hljs">JLD2Writer scheduled on TimeInterval(1 hour):
+├── filepath: era5_forced_slab_land.jld2
+├── 6 outputs: (T, W, 𝒮, Q, E, P)
+├── array_type: Array{Float32}
+├── including: ()
+├── file_splitting: NoFileSplitting
+└── file size: 0 bytes (file not yet created)</code></pre><h2 id="Run"><a class="docs-heading-anchor" href="#Run">Run</a><a id="Run-1"></a><a class="docs-heading-anchor-permalink" href="#Run" title="Permalink"></a></h2><pre><code class="language-julia hljs">@info &quot;Running ERA5-forced slab land simulation at ~1 km...&quot;
+run!(simulation)
+@info &quot;Simulation complete.&quot;</code></pre><pre><code class="nohighlight hljs">[ Info: Running ERA5-forced slab land simulation at ~1 km...
+[ Info: Initializing simulation...
+[ Info: Iter 0  t = 0 seconds  T 262.3–281.8 K  W 75.0–75.0 kg m⁻²  ⟨𝒮⟩ 0.50  ⟨Q⟩ +133.0 W m⁻²  wall Δ 5.5s
+[ Info:     ... simulation initialization complete (10.930 seconds)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (2.832 seconds).
+[ Info: Iter 144  t = 12 hours  T 260.9–272.6 K  W 74.7–83.9 kg m⁻²  ⟨𝒮⟩ 0.53  ⟨Q⟩  -44.4 W m⁻²  wall Δ 23.3s
+[ Info: Iter 288  t = 1 day  T 261.7–278.6 K  W 74.3–87.1 kg m⁻²  ⟨𝒮⟩ 0.54  ⟨Q⟩  -79.6 W m⁻²  wall Δ 11.8s
+[ Info: Iter 432  t = 1.500 days  T 254.8–267.7 K  W 78.2–92.3 kg m⁻²  ⟨𝒮⟩ 0.56  ⟨Q⟩  -71.1 W m⁻²  wall Δ 12.3s
+[ Info: Iter 576  t = 2 days  T 264.8–276.4 K  W 78.4–94.0 kg m⁻²  ⟨𝒮⟩ 0.57  ⟨Q⟩  -91.6 W m⁻²  wall Δ 12.9s
+[ Info: Iter 720  t = 2.500 days  T 251.2–264.0 K  W 78.9–95.3 kg m⁻²  ⟨𝒮⟩ 0.57  ⟨Q⟩  -80.8 W m⁻²  wall Δ 13.9s
+[ Info: Simulation is stopping after running for 1.426 minutes.
+[ Info: Simulation time 2.958 days equals or exceeds stop time 2.958 days.
+[ Info: Simulation complete.
+</code></pre><p>Release the JLD2 writer&#39;s file handle and drop the working FTS before the animation re-opens the file. At 200 × 200 the combined working set is large enough that leaving these references live can segfault the same Julia session during heatmap setup.</p><pre><code class="language-julia hljs">close(simulation.output_writers[:land])
+delete!(simulation.output_writers, :land)
+atmosphere = radiation = simulation = model = nothing
+GC.gc(true); GC.gc(true)</code></pre><h2 id="Animation"><a class="docs-heading-anchor" href="#Animation">Animation</a><a id="Animation-1"></a><a class="docs-heading-anchor-permalink" href="#Animation" title="Permalink"></a></h2><p>Three spatial panels — T, 𝒮, Q — plus a static elevation panel and a domain-mean T(t) time series. The elevation panel makes the lapse-rate signature in T(λ, φ) directly readable.</p><pre><code class="language-julia hljs">T_ts = FieldTimeSeries(&quot;era5_forced_slab_land.jld2&quot;, &quot;T&quot;)
+𝒮_ts = FieldTimeSeries(&quot;era5_forced_slab_land.jld2&quot;, &quot;𝒮&quot;)
+Q_ts = FieldTimeSeries(&quot;era5_forced_slab_land.jld2&quot;, &quot;Q&quot;)
+
+times      = T_ts.times
+Nframes    = length(times)
+times_days = collect(times) ./ 86400</code></pre><pre><code class="nohighlight hljs">72-element Vector{Float64}:
+ 0.0
+ 0.041666666666666664
+ 0.08333333333333333
+ 0.125
+ 0.16666666666666666
+ 0.20833333333333334
+ 0.25
+ 0.2916666666666667
+ 0.3333333333333333
+ 0.375
+ 0.4166666666666667
+ 0.4583333333333333
+ 0.5
+ 0.5416666666666666
+ 0.5833333333333334
+ 0.625
+ 0.6666666666666666
+ 0.7083333333333334
+ 0.75
+ 0.7916666666666666
+ 0.8333333333333334
+ 0.875
+ 0.9166666666666666
+ 0.9583333333333334
+ 1.0
+ 1.0416666666666667
+ 1.0833333333333333
+ 1.125
+ 1.1666666666666667
+ 1.2083333333333333
+ 1.25
+ 1.2916666666666667
+ 1.3333333333333333
+ 1.375
+ 1.4166666666666667
+ 1.4583333333333333
+ 1.5
+ 1.5416666666666667
+ 1.5833333333333333
+ 1.625
+ 1.6666666666666667
+ 1.7083333333333333
+ 1.75
+ 1.7916666666666667
+ 1.8333333333333333
+ 1.875
+ 1.9166666666666667
+ 1.9583333333333333
+ 2.0
+ 2.0416666666666665
+ 2.0833333333333335
+ 2.125
+ 2.1666666666666665
+ 2.2083333333333335
+ 2.25
+ 2.2916666666666665
+ 2.3333333333333335
+ 2.375
+ 2.4166666666666665
+ 2.4583333333333335
+ 2.5
+ 2.5416666666666665
+ 2.5833333333333335
+ 2.625
+ 2.6666666666666665
+ 2.7083333333333335
+ 2.75
+ 2.7916666666666665
+ 2.8333333333333335
+ 2.875
+ 2.9166666666666665
+ 2.9583333333333335</code></pre><p>Colorrange for 𝒮 covers the actual span over the run (clamped to a sensible minimum width so an unusually static field still renders cleanly).</p><pre><code class="language-julia hljs">𝒮_lo, 𝒮_hi = extrema(𝒮_ts)
+𝒮_range = (𝒮_lo, max(𝒮_hi, 𝒮_lo + 0.1))
+
+fig = Figure(size = (1500, 1000), fontsize = 12)
+ax_T = Axis(fig[1, 1]; title = &quot;Skin temperature T (K)&quot;,    xlabel = &quot;longitude&quot;, ylabel = &quot;latitude&quot;, aspect = DataAspect())
+ax_𝒮 = Axis(fig[1, 2]; title = &quot;Surface saturation 𝒮&quot;,   xlabel = &quot;longitude&quot;, ylabel = &quot;latitude&quot;, aspect = DataAspect())
+ax_Q = Axis(fig[1, 3]; title = &quot;Net energy flux Q (W m⁻²)&quot;, xlabel = &quot;longitude&quot;, ylabel = &quot;latitude&quot;, aspect = DataAspect())
+ax_z = Axis(fig[2, 1]; title = &quot;Elevation (m, ETOPO 2022)&quot;, xlabel = &quot;longitude&quot;, ylabel = &quot;latitude&quot;, aspect = DataAspect())
+ax_t = Axis(fig[2, 2:3]; title = &quot;Domain T extrema and mean over time&quot;, xlabel = &quot;t (days)&quot;, ylabel = &quot;T (K)&quot;)
+
+n  = Observable(1)
+Tn = @lift T_ts[$n]
+𝒮n = @lift 𝒮_ts[$n]
+Qn = @lift Q_ts[$n]
+
+hm_T = heatmap!(ax_T, Tn; colormap = :thermal, colorrange = (250, 300))
+hm_𝒮 = heatmap!(ax_𝒮, 𝒮n; colormap = :tempo,   colorrange = 𝒮_range)
+hm_Q = heatmap!(ax_Q, Qn; colormap = :balance, colorrange = (-400, 400))
+hm_z = heatmap!(ax_z, z_land; colormap = :terrain, colorrange = (1000, 3500))
+
+Colorbar(fig[1, 1, Right()], hm_T; label = &quot;T (K)&quot;)
+Colorbar(fig[1, 2, Right()], hm_𝒮; label = &quot;𝒮&quot;)
+Colorbar(fig[1, 3, Right()], hm_Q; label = &quot;Q (W m⁻²)&quot;)
+Colorbar(fig[2, 1, Right()], hm_z; label = &quot;elevation (m)&quot;)
+
+T_mean = [mean(T_ts[k])    for k in 1:Nframes]
+T_max  = [maximum(T_ts[k]) for k in 1:Nframes]
+T_min  = [minimum(T_ts[k]) for k in 1:Nframes]
+lines!(ax_t, times_days, T_max;  color = :red,   linewidth = 1.5, label = &quot;max&quot;)
+lines!(ax_t, times_days, T_mean; color = :black, linewidth = 1.5, label = &quot;mean&quot;)
+lines!(ax_t, times_days, T_min;  color = :blue,  linewidth = 1.5, label = &quot;min&quot;)
+axislegend(ax_t; position = :rb)
+vlines!(ax_t, @lift([times_days[$n]]); color = :black, linewidth = 1.0, linestyle = :dash)
+
+Label(fig[0, 1:3], @lift(&quot;ERA5-forced slab land — Greater Yellowstone at ~1 km, t = &quot; * prettytime(times[$n])), fontsize = 16)
+
+@info &quot;Rendering animation...&quot;
+CairoMakie.record(fig, &quot;era5_forced_slab_land.mp4&quot;, 1:Nframes; framerate = 12) do nn
+    n[] = nn
+end
+@info &quot;Animation saved.&quot;
+</code></pre><pre><code class="nohighlight hljs">[ Info: Rendering animation...
+[ Info: Animation saved.
+</code></pre><p><video src="../era5_forced_slab_land.mp4" controls="true" title><a href="../era5_forced_slab_land.mp4"></a></video></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../exploring_era5_reanalysis_data/">« ERA5 and GloFAS reanalysis data</a><a class="docs-footer-nextpage" href="../breeze_over_slab_land/">Breeze over slab land »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Wednesday 1 July 2026 14:15">Wednesday 1 July 2026</span>. Using Julia version 1.12.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
