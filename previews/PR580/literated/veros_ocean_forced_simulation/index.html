@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Veros ocean simulation · NumericalEarth.jl</title><meta name="title" content="Veros ocean simulation · NumericalEarth.jl"/><meta property="og:title" content="Veros ocean simulation · NumericalEarth.jl"/><meta property="twitter:title" content="Veros ocean simulation · NumericalEarth.jl"/><meta name="description" content="Documentation for NumericalEarth.jl."/><meta property="og:description" content="Documentation for NumericalEarth.jl."/><meta property="twitter:description" content="Documentation for NumericalEarth.jl."/><meta property="og:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/veros_ocean_forced_simulation/"/><meta property="twitter:url" content="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/veros_ocean_forced_simulation/"/><link rel="canonical" href="https://numericalearth.github.io/NumericalEarthDocumentation/stable/literated/veros_ocean_forced_simulation/"/><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.63.2/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../search_index.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/documentercitations/citations-hover.css" rel="stylesheet" type="text/css"/><link href="../../assets/documentercitations/citations.css" rel="stylesheet" type="text/css"/><script src="../../assets/documentercitations/citations-data.js"></script><script src="../../assets/documentercitations/citations-hover.js"></script><script src="../../assets/documentercitations/citations-backlinks.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">NumericalEarth.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><a class="tocitem" href="../../earth_system_model/">EarthSystemModel</a></li><li><span class="tocitem">Examples</span><ul><li><a class="tocitem" href="../single_column_os_papa_simulation/">Single-column ocean simulation</a></li><li><a class="tocitem" href="../coupled_conservation/">Coupled conservation on a z-star grid</a></li><li><a class="tocitem" href="../one_degree_simulation/">One-degree ocean–sea ice simulation</a></li><li><a class="tocitem" href="../global_climate_simulation/">Global climate simulation</a></li><li class="is-active"><a class="tocitem" href>Veros ocean simulation</a></li><li><a class="tocitem" href="../breeze_over_four_oceans/">Breeze over four oceans</a></li><li><a class="tocitem" href="../exploring_era5_reanalysis_data/">ERA5 and GloFAS reanalysis data</a></li><li><a class="tocitem" href="../breeze_over_slab_land/">Breeze over slab land</a></li><li><a class="tocitem" href="../era5_forced_slab_land/">Differentiable ERA5-forced slab land</a></li><li><a class="tocitem" href="../breeze_downscaling_era5/">ERA5 downscaling with Breeze</a></li></ul></li><li><span class="tocitem">Developers</span><ul><li><a class="tocitem" href="../implement_a_dataset/">Implementing a new dataset</a></li></ul></li><li><a class="tocitem" href="../../vertical_grids/">Vertical grids</a></li><li><span class="tocitem">Metadata</span><ul><li><a class="tocitem" href="../../Metadata/metadata_overview/">Overview</a></li><li><a class="tocitem" href="../../Metadata/supported_variables/">Supported variables</a></li></ul></li><li><a class="tocitem" href="../../interface_fluxes/">Interface fluxes</a></li><li><span class="tocitem">Appendix</span><ul><li><a class="tocitem" href="../../appendix/notation/">Notation</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../library/outline/">Contents</a></li><li><a class="tocitem" href="../../library/public_api/">Public API</a></li><li><a class="tocitem" href="../../library/private_api/">Private API</a></li><li><a class="tocitem" href="../../library/function_index/">Function index</a></li></ul></li><li><a class="tocitem" href="../../references/">References</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li class="is-active"><a href>Veros ocean simulation</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Veros ocean simulation</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/NumericalEarth/NumericalEarth.jl/blob/main/examples/veros_ocean_forced_simulation.jl" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="An-Ocean-Simulation-at-4ᵒ-Resolution-Forced-by-JRA55-Reanalysis"><a class="docs-heading-anchor" href="#An-Ocean-Simulation-at-4ᵒ-Resolution-Forced-by-JRA55-Reanalysis">An Ocean Simulation at 4ᵒ Resolution Forced by JRA55 Reanalysis</a><a id="An-Ocean-Simulation-at-4ᵒ-Resolution-Forced-by-JRA55-Reanalysis-1"></a><a class="docs-heading-anchor-permalink" href="#An-Ocean-Simulation-at-4ᵒ-Resolution-Forced-by-JRA55-Reanalysis" title="Permalink"></a></h1><p>This example showcases the use of NumericalEarth&#39;s PythonCall extension to run a near-global ocean simulation at 4-degree resolution using the Veros ocean model. The ocean is forced by the JRA55 reanalysis data</p><p>For this example, we need Oceananigans, NumericalEarth, Dates, CUDA, and CairoMakie to visualize the simulation.</p><pre><code class="language-julia hljs">using NumericalEarth
+using PythonCall
+using Oceananigans, Oceananigans.Units
+using CairoMakie
+using Printf</code></pre><pre><code class="nohighlight hljs">[ Info: Oceananigans will use 8 threads
+</code></pre><p>We import the Veros 4 degree ocean simulation setup, which consists of a near-global ocean with a uniform resolution of 4 degrees in both latitude and longitude and a latitude range spanning from 80S to 80N. The setup is defined in the <code>veros.setups.global_4deg</code> module.</p><p>Before importing the setup, the Veros Python package must be available in the active CondaPkg environment. In the documentation CI this is installed ahead of time in the workflow. For a fresh local environment, run</p><pre><code class="language-julia hljs">VerosModule = Base.get_extension(NumericalEarth, :NumericalEarthVerosExt)
+VerosModule.install_veros()</code></pre><p>once before executing this example.</p><pre><code class="language-julia hljs">VerosModule = Base.get_extension(NumericalEarth, :NumericalEarthVerosExt)
+
+VerosModule.remove_outputs(:global_4deg)</code></pre><p>Actually loading and instantiating the Veros setup in the variable <code>ocean</code>.</p><pre><code class="language-julia hljs">ocean = VerosModule.VerosOceanSimulation(&quot;global_4deg&quot;, :GlobalFourDegreeSetup)</code></pre><pre><code class="nohighlight hljs">NumericalEarthVerosExt.VerosOceanSimulation{PythonCall.Py}(&lt;py veros.setups.global_4deg.global_4deg.GlobalFourDegreeSetup object at 0x7fdcd4b9b9e0&gt;)</code></pre><p>The loaded Veros setup contains a <code>set_forcing</code> method which computes the fluxes as restoring from climatology. We replace it with a custom function that only computes the TKE forcing (which depends on the wind stresses that we set in NumericalEarth). This way our u, v, T, S forcings are not overwritten. The <code>set_forcing_tke_only</code> method defined below is modified from the <code>set_forcing</code> method defined in https://github.com/team-ocean/veros/blob/main/veros/setups/global<em>4deg/global</em>4deg.py</p><pre><code class="language-julia hljs">pyexec(&quot;&quot;&quot;
+def set_forcing_tke_only(state):
+    from veros.core.operators import numpy as npx, update, at
+    from veros import KernelOutput
+
+    vs = state.variables
+    settings = state.settings
+
+    if settings.enable_tke:
+        vs.forc_tke_surface = update(
+            vs.forc_tke_surface,
+            at[1:-1, 1:-1],
+            npx.sqrt(
+                (0.5 * (vs.surface_taux[1:-1, 1:-1] + vs.surface_taux[:-2, 1:-1]) / settings.rho_0) ** 2
+                + (0.5 * (vs.surface_tauy[1:-1, 1:-1] + vs.surface_tauy[1:-1, :-2]) / settings.rho_0) ** 2
+            ) ** 1.5,
+        )
+
+    return KernelOutput(
+        surface_taux=vs.surface_taux,
+        surface_tauy=vs.surface_tauy,
+        forc_tke_surface=vs.forc_tke_surface,
+        forc_temp_surface=vs.forc_temp_surface,
+        forc_salt_surface=vs.forc_salt_surface,
+    )
+
+ocean.set_forcing = set_forcing_tke_only
+&quot;&quot;&quot;, Main, (ocean=ocean.setup,))</code></pre><p>We force the 4-degree setup with a prescribed atmosphere based on the JRA-55 reanalysis data. This includes 2-meter wind velocity, temperature, humidity, downwelling longwave and shortwave radiation, as well as freshwater fluxes.</p><pre><code class="language-julia hljs">atmos = JRA55PrescribedAtmosphere()
+radiation = JRA55PrescribedRadiation()</code></pre><pre><code class="nohighlight hljs">640×320×1×2920 PrescribedRadiation on LatitudeLongitudeGrid:
+├── times: 2920-element StepRangeLen{Float64, Base.TwicePrecision{Float64}, Base.TwicePrecision{Float64}, Int64}
+├── stefan_boltzmann_constant: 5.67037e-8
+└── surface_properties: (:ocean, :sea_ice)</code></pre><p>The coupled ocean–atmosphere model. We do not couple an ice model for simplicity.</p><pre><code class="language-julia hljs">coupled_model = OceanSeaIceModel(ocean, nothing; atmosphere=atmos, radiation)
+simulation = Simulation(coupled_model; Δt = 30minutes, stop_time = 60days)</code></pre><pre><code class="nohighlight hljs">Simulation of EarthSystemModel{CPU}(time = 0 seconds, iteration = 0)
+├── Next time step: 30 minutes
+├── run_wall_time: 0 seconds
+├── run_wall_time / iteration: NaN days
+├── stop_time: 60 days
+├── stop_iteration: Inf
+├── wall_time_limit: Inf
+├── minimum_relative_step: 0.0
+├── callbacks: OrderedDict with 4 entries:
+│   ├── stop_time_exceeded =&gt; Callback of stop_time_exceeded on IterationInterval(1)
+│   ├── stop_iteration_exceeded =&gt; Callback of stop_iteration_exceeded on IterationInterval(1)
+│   ├── wall_time_limit_exceeded =&gt; Callback of wall_time_limit_exceeded on IterationInterval(1)
+│   └── nan_checker =&gt; Callback of NaNChecker for T_ocean on IterationInterval(100)
+└── output_writers: OrderedDict with no entries</code></pre><p>We set up a progress callback that will print the current time, iteration, and maximum velocities every 10days. We also set up another callback that collects the surface prognostic variables into arrays for later visualization.</p><pre><code class="language-julia hljs">wall_time = Ref(time_ns())
+
+function progress(sim)
+    ocean = sim.model.ocean
+    umax = maximum(PyArray(ocean.setup.state.variables.u))
+    vmax = maximum(PyArray(ocean.setup.state.variables.v))
+    wmax = maximum(PyArray(ocean.setup.state.variables.w))
+
+    step_time = 1e-9 * (time_ns() - wall_time[])
+
+    msg1 = @sprintf(&quot;time: %s, iteration: %d, Δt: %s, &quot;, prettytime(sim), iteration(sim), prettytime(sim.Δt))
+    msg5 = @sprintf(&quot;maximum(u): (%.2f, %.2f, %.2f) m/s, &quot;, umax, vmax, wmax)
+    msg6 = @sprintf(&quot;wall time: %s \n&quot;, prettytime(step_time))
+
+    @info msg1 * msg5 * msg6
+
+    wall_time[] = time_ns()
+
+    return nothing
+end
+
+u = []
+v = []
+
+function save_variables(sim)
+    push!(u, deepcopy(sim.model.interfaces.exchanger.ocean.state.u))
+    push!(v, deepcopy(sim.model.interfaces.exchanger.ocean.state.v))
+end
+
+add_callback!(simulation, progress, TimeInterval(10days))
+add_callback!(simulation, save_variables, IterationInterval(10))</code></pre><p>Let&#39;s run the simulation!</p><pre><code class="language-julia hljs">run!(simulation)</code></pre><pre><code class="nohighlight hljs">[ Info: Initializing simulation...
+[ Info: time: 0 seconds, iteration: 0, Δt: 30 minutes, maximum(u): (0.03, 0.03, 0.00) m/s, wall time: 20.514 seconds 
+[ Info:     ... simulation initialization complete (826.932 ms)
+[ Info: Executing initial time step...
+[ Info:     ... initial time step complete (2.260 seconds).
+[ Info: time: 10 days, iteration: 480, Δt: 30 minutes, maximum(u): (0.44, 0.41, 0.00) m/s, wall time: 3.619 minutes 
+[ Info: time: 20 days, iteration: 960, Δt: 30 minutes, maximum(u): (0.32, 0.44, 0.00) m/s, wall time: 3.427 minutes 
+[ Info: time: 30 days, iteration: 1440, Δt: 30 minutes, maximum(u): (0.33, 0.37, 0.00) m/s, wall time: 3.488 minutes 
+[ Info: time: 40 days, iteration: 1920, Δt: 30 minutes, maximum(u): (0.47, 0.32, 0.00) m/s, wall time: 3.545 minutes 
+[ Info: time: 50 days, iteration: 2400, Δt: 30 minutes, maximum(u): (0.50, 0.32, 0.00) m/s, wall time: 3.636 minutes 
+[ Info: Simulation is stopping after running for 21.264 minutes.
+[ Info: Simulation time 60 days equals or exceeds stop time 60 days.
+[ Info: time: 60 days, iteration: 2880, Δt: 30 minutes, maximum(u): (0.28, 0.39, 0.00) m/s, wall time: 3.546 minutes 
+</code></pre><p>After the simulation is done, we can visualize the surface zonal and meridional velocities as a function of latitude and time.</p><pre><code class="language-julia hljs">n  = Observable(1)
+un = @lift(u[$n])
+vn = @lift(v[$n])
+Nt = length(u)
+
+fig = Figure(size = (900, 630))
+ax1 = Axis(fig[1, 1]; title = &quot;Surface zonal velocity (m/s)&quot;, xlabel = &quot;&quot;, ylabel = &quot;Latitude&quot;)
+ax2 = Axis(fig[2, 1]; title = &quot;Surface meridional velocity (m/s)&quot;, xlabel = &quot;&quot;, ylabel = &quot;Latitude&quot;)
+hm1 = heatmap!(ax1, un, colormap = :bwr, colorrange = (-0.2, 0.2))
+hm2 = heatmap!(ax2, vn, colormap = :bwr, colorrange = (-0.2, 0.2))
+
+Colorbar(fig[1, 2], hm1)
+Colorbar(fig[2, 2], hm2)
+
+CairoMakie.record(fig, &quot;veros_ocean_surface.mp4&quot;, 1:Nt, framerate = 8) do nn
+    n[] = nn
+end</code></pre><p><video src="../veros_ocean_surface.mp4" controls="true" title><a href="../veros_ocean_surface.mp4"></a></video></p><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../global_climate_simulation/">« Global climate simulation</a><a class="docs-footer-nextpage" href="../breeze_over_four_oceans/">Breeze over four oceans »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.19.0 on <span class="colophon-date" title="Saturday 10 October 2026 03:40">Saturday 10 October 2026</span>. Using Julia version 1.12.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
