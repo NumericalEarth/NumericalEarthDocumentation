@@ -1,0 +1,33 @@
+Starting SpeedyWeather.jl run_0001 on Sat, 07 Nov 2026 09:11:18
+Integrating:
+SpectralGrid{Spectrum{...}, RingGrids.FullClenshawGrid{...}}
+├ Number format: Float64
+├ Spectral:      T64 LowerTriangularMatrix, 2144 harmonics
+├ Grid:          127-ring RingGrids.FullClenshawGrid, 32512 grid points
+├ Resolution:    1.13°, 125km (at 6371km radius)
+├ Vertical:      4-layer atmosphere
+└ Architecture:  GPU(CUDACore.CUDAKernels.CUDABackend(false, true)) using CUDACore.CuArray
+Time: 30.0 days at Δt = 1200.0s
+
+All data will be stored in /storage5/github-action-runners/actions-runner-3/_work/NumericalEarth.jl/NumericalEarth.jl/docs/src/literated/run_0001
+
+  5%, ETA: 5:45:55, , 372316.30 millenia/day
+ 10%, ETA: 3:03:15, , 744632.60 millenia/day
+ 15%, ETA: 2:07:38, , 1116948.90 millenia/day
+ 20%, ETA: 1:38:45, , 1489265.20 millenia/day
+ 25%, ETA: 1:20:34, , 1861581.50 millenia/day
+ 30%, ETA: 1:07:44, , 2233897.80 millenia/day
+ 35%, ETA: 0:57:57, , 2606214.10 millenia/day
+ 40%, ETA: 0:50:06, , 2978530.40 millenia/day
+ 45%, ETA: 0:43:30, , 3350846.70 millenia/day
+ 50%, ETA: 0:37:47, , 3723163.00 millenia/day
+ 55%, ETA: 0:32:43, , 4095479.30 millenia/day
+ 60%, ETA: 0:28:07, , 4467795.60 millenia/day
+ 65%, ETA: 0:23:54, , 4840111.90 millenia/day
+ 70%, ETA: 0:19:58, , 5212428.20 millenia/day
+ 75%, ETA: 0:16:16, , 5584744.50 millenia/day
+ 80%, ETA: 0:12:46, , 5957060.80 millenia/day
+ 85%, ETA: 0:09:24, , 6329377.10 millenia/day
+ 90%, ETA: 0:06:11, , 6701693.40 millenia/day
+ 95%, ETA: 0:03:03, , 7074009.71 millenia/day
+100%, ETA: 0:00:02, , 7446326.01 millenia/day
