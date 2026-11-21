@@ -18,13 +18,13 @@ Geometry for SpectralGrid{Spectrum{...}, RingGrids.FullClenshawGrid{...}}
 ├ Grid: 127-ring RingGrids.FullClenshawGrid, 32512 grid points
 └ Vertical: 4-layer [33mSigmaCoordinates[39m[90m{Int64, CUDACore.CuArray{Float64, 1, CUDACore.DeviceMemory}}[39m
  ├─ 0.0000  k = 0.5
- │× 0.1250  k = 1
- ├─ 0.2500  k = 1.5
- │× 0.3750  k = 2
- ├─ 0.5000  k = 2.5
- │× 0.6250  k = 3
- ├─ 0.7500  k = 3.5
- │× 0.8750  k = 4
+ │× 0.0559  k = 1
+ ├─ 0.1118  k = 1.5
+ │× 0.2996  k = 2
+ ├─ 0.4874  k = 2.5
+ │× 0.6798  k = 3
+ ├─ 0.8722  k = 3.5
+ │× 0.9361  k = 4
  └─ 1.0000  k = 4.5
 
 model.planet
@@ -60,7 +60,7 @@ SpeedyWeather.EarthAtmosphere{Float64} <: SpeedyWeather.AbstractWetAtmosphere
 ├ saturation_vapor_pressure::Float64 = 610.78
 ├ reference_temperature::Float64 = 288.0
 ├ temperature_freezing::Float64 = 273.15
-├ moist_lapse_rate::Float64 = 0.005
+├ moist_lapse_rate::Float64 = 0.0057
 └ dry_lapse_rate::Float64 = 0.009800000000000001
 
 model.coriolis
@@ -79,20 +79,19 @@ model.particle_advection
 nothing
 
 model.initial_conditions
-(vordiv = SpeedyWeather.ZonalWind{Float64} <: SpeedyWeather.AbstractInitialConditions
-├ η₀::Float64 = 0.252
-├ u₀::Float64 = 35.0
+(zonal = SpeedyWeather.BalancedZonalState{Float64} <: SpeedyWeather.AbstractInitialConditions
+├ u₀::Float64 = 56.0
+├ H::Float64 = 2.0
+├ σ_jet::Float64 = 0.3
+├ jet_decay::Float64 = 1.5
+├ Tmin::Float64 = 226.0
 ├ perturb_lat::Float64 = 40.0
 ├ perturb_lon::Float64 = 20.0
 ├ perturb_uₚ::Float64 = 1.0
-└ perturb_radius::Float64 = 0.1, pres = SpeedyWeather.PressureOnOrography <: SpeedyWeather.AbstractInitialConditions
-, temp = SpeedyWeather.JablonowskiTemperature{Float64} <: SpeedyWeather.AbstractInitialConditions
-├ η₀::Float64 = 0.252
-├ σ_tropopause::Float64 = 0.2
-├ u₀::Float64 = 35.0
-├ ΔT::Float64 = 0.0
-└ Tmin::Float64 = 200.0, humid = SpeedyWeather.ConstantRelativeHumidity{Float64} <: SpeedyWeather.AbstractInitialConditions
-└ relhumid_ref::Float64 = 0.7)
+└ perturb_radius::Float64 = 0.1, humid = SpeedyWeather.ConstantRelativeHumidity{Float64} <: SpeedyWeather.AbstractInitialConditions
+├ relhumid_ref::Float64 = 0.7
+├ σ_moist::Float64 = 0.25
+└ σ_dry::Float64 = 0.1)
 
 model.forcing
 nothing
@@ -116,7 +115,7 @@ SpeedyWeather.EarthOrography{Float64, RingGrids.Field{Floa...} <: SpeedyWeather.
 ├ file::String = orography.nc
 ├ path::String = data/boundary_conditions/orography.nc
 ├ from_assets::Bool = true
-├ version::VersionNumber = 1.0.0
+├ version::VersionNumber = 1.1.0
 ├ varname::String = orog
 ├ FieldType::UnionAll = RingGrids.FullGaussianField
 ├ scale::Float64 = 1.0
@@ -131,7 +130,7 @@ SpeedyWeather.EarthLandSeaMask{Float64, RingGrids.Field{Floa...} <: SpeedyWeathe
 ├ file::String = land-sea_mask.nc
 ├ path::String = data/boundary_conditions/land-sea_mask.nc
 ├ from_assets::Bool = true
-├ version::VersionNumber = 1.0.0
+├ version::VersionNumber = 1.1.0
 ├ varname::String = lsm
 ├ FieldType::UnionAll = RingGrids.FullClenshawField
 ├ quantization::Float64 = 0.01
@@ -165,42 +164,34 @@ SpeedyWeather.SolarZenith{SpeedyWeather.SinSolarDeclina...} <: SpeedyWeather.Abs
 model.albedo
 SpeedyWeather.OceanLandAlbedo{SpeedyWeather.OceanSeaIceAlbe...} <: SpeedyWeather.AbstractAlbedo
 ├ ocean::SpeedyWeather.OceanSeaIceAlbedo{Float64}
-└ land::SpeedyWeather.LandSnowAlbedo{Float64, SpeedyWeather.SaturatingSnowCov...
+└ land::SpeedyWeather.LearnedLandAlbedo{Float64, Bool, SpeedyWeather.Saturati...
 
 model.boundary_layer
 SpeedyWeather.BoundaryLayer{SpeedyWeather.SurfaceConditio...} <: SpeedyWeather.AbstractBoundaryLayer
-├ surface_condition::SpeedyWeather.SurfaceCondition{Float64}
-├ neutral_wind_speed::Nothing
-├ surface_roughness::SpeedyWeather.ConstantSurfaceRoughness{Float64}
+├ surface_condition::SpeedyWeather.SurfaceCondition{SpeedyWeather.LearnedWind...
+├ neutral_wind_speed::SpeedyWeather.NeutralWindSpeed{Float64}
+├ surface_roughness::SpeedyWeather.LearnedSurfaceRoughness{SpeedyWeather.Lear...
 └ drag::SpeedyWeather.BulkRichardsonDrag{Float64}
 
 model.vertical_diffusion
-SpeedyWeather.BulkRichardsonDiffusion{Float64, CUDACore.CuArray{Flo...} <: SpeedyWeather.AbstractVerticalDiffusion
-├ von_Karman::Float64 = 0.4
-├ roughness_length::Float64 = 3.21e-5
-├ critical_Richardson::Float64 = 10.0
-├ surface_layer_fraction::Float64 = 0.1
-├ diffuse_static_energy::Bool = true
-├ diffuse_momentum::Bool = true
-├ diffuse_humidity::Bool = true
-└ arrays: ∇²_above, ∇²_below
+nothing
 
 model.surface_momentum_flux
-SpeedyWeather.SurfaceMomentumFlux{Float64} <: SpeedyWeather.AbstractSurfaceMomentumFlux
-├ wind_slowdown::Float64 = 0.95
+SpeedyWeather.SurfaceMomentumFlux{Float64, SpeedyWeather.Ration...} <: SpeedyWeather.AbstractSurfaceMomentumFlux
 ├ use_boundary_layer_drag::Bool = true
 ├ drag_ocean::Float64 = 0.0018
-└ drag_land::Float64 = 0.0024
+├ drag_land::Float64 = 0.0024
+└ time_integration::SpeedyWeather.RationalFluxes = SpeedyWeather.RationalFlux...
 
 model.surface_heat_flux
 SpeedyWeather.SurfaceHeatFlux{SpeedyWeather.PrescribedOcean...} <: SpeedyWeather.AbstractSurfaceHeatFlux
 ├ ocean::SpeedyWeather.PrescribedOceanHeatFlux
-└ land::SpeedyWeather.SurfaceLandHeatFlux{Float64}
+└ land::SpeedyWeather.SurfaceLandHeatFlux{Float64, SpeedyWeather.RationalFlux...
 
 model.surface_humidity_flux
 SpeedyWeather.SurfaceHumidityFlux{SpeedyWeather.PrescribedOcean...} <: SpeedyWeather.AbstractSurfaceHumidityFlux
 ├ ocean::SpeedyWeather.PrescribedOceanHumidityFlux
-└ land::SpeedyWeather.SurfaceLandHumidityFlux{Float64}
+└ land::SpeedyWeather.SurfaceLandHumidityFlux{Float64, SpeedyWeather.Rational...
 
 model.large_scale_condensation
 SpeedyWeather.ImplicitCondensation{Float64} <: SpeedyWeather.AbstractCondensation
@@ -257,7 +248,9 @@ SpeedyWeather.ImplicitPrimitiveEquation{Float64, CUDACore.CuArray{Flo...} <: Spe
 ├ truncation::Int64 = 64
 ├ nlayers::Int64 = 4
 ├ nlayers_val::Val{4} = Val{4}()
-├ centering::Float64 = 1.0
+├ centering::Float64 = 0.5
+├ reference_temperature::SpeedyWeather.IsothermalReferenceTemperature{Float64...
+├ schedule::SpeedyWeather.PeriodicSchedule = [33mSpeedyWeather.PeriodicSched...
 ├ Δt::Base.RefValue{Float64} = Base.RefValue{Float64}(0.0)
 └ arrays: temp_profile, R, U, L, W, L0, L1, L2, L3, L4, S, S⁻¹
 
@@ -282,10 +275,10 @@ SpeedyWeather.ClipNegatives <: SpeedyWeather.AbstractHoleFilling
 
 
 model.output
-NetCDFOutput{RingGrids.Field{Float32, 1, V...}
+NetCDFOutput{RingGrids.Field{Float32, 1, C...}
 ├ status: active
 ├ write restart file = true (if active)
-├ interpolator::RingGrids.AnvilInterpolator{Float32, RingGrids.GridGeometry{Ring...}
+├ interpolator::RingGrids.AnvilInterpolator{Float64, RingGrids.GridGeometry{Ring...}
 ├ layers::SpeedyWeather.ModelLayers
 ├ path = /storage5/github-action-runners/actions-runner-3/_work/NumericalEarth.jl/NumericalEarth.jl/docs/src/literated/run_0001/output.nc (overwrite=false)
 ├ interval = 10800 seconds
@@ -311,7 +304,7 @@ Dict{Symbol, SpeedyWeather.AbstractCallback}(:progress_txt => SpeedyWeather.Prog
 ├ path::String = 
 ├ compress::Bool = true
 ├ write_only_with_output::Bool = true
-└ pkg_version::VersionNumber = 0.23.0)
+└ pkg_version::VersionNumber = 0.24.1)
 
 model.feedback
 SpeedyWeather.Feedback <: SpeedyWeather.AbstractFeedback
@@ -322,8 +315,8 @@ SpeedyWeather.Feedback <: SpeedyWeather.AbstractFeedback
 ├ showspeed::Bool = true
 ├ feedback_dt::Float32 = 0.1
 ├ show_time::Bool = true
-├ show_umax::Bool = true
-├ show_temperature_range::Bool = true
+├ show_umax::Nothing = nothing
+├ show_temperature_range::Nothing = nothing
 ├ interval::Int64 = 50
 ├ progress_meter::ProgressMeter.Progress{IO} = ProgressMeter.Progress{IO} <: ...
 └ nans_detected::Bool = false
@@ -332,8 +325,8 @@ model.core_components
 (:architecture, :time_stepping, :orography, :geopotential, :atmosphere, :planet, :geometry, :land_sea_mask)
 
 model.parameterizations
-(:solar_zenith, :vertical_diffusion, :large_scale_condensation, :convection, :albedo, :radiation, :boundary_layer, :surface_momentum_flux, :surface_heat_flux, :surface_humidity_flux, :stochastic_physics)
+(:solar_zenith, :vertical_diffusion, :boundary_layer, :surface_momentum_flux, :surface_heat_flux, :surface_humidity_flux, :large_scale_condensation, :convection, :albedo, :radiation, :stochastic_physics)
 
 model.params
-Val{(:solar_zenith, :vertical_diffusion, :large_scale_condensation, :convection, :albedo, :radiation, :boundary_layer, :surface_momentum_flux, :surface_heat_flux, :surface_humidity_flux, :stochastic_physics)}()
+Val{(:solar_zenith, :vertical_diffusion, :boundary_layer, :surface_momentum_flux, :surface_heat_flux, :surface_humidity_flux, :large_scale_condensation, :convection, :albedo, :radiation, :stochastic_physics)}()
 
